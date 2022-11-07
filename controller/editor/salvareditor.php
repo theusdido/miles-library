@@ -26,7 +26,7 @@ if ($conn = Transacao::get()){
 				//$idTag = getProxId("tags",$conn);
 				$idTag = $tags["idtag"];
 				
-				$texto = utf8charset($tags["text"]);
+				$texto = tdc::utf8($tags["text"]);
 				$sqlInsertTag = "INSERT INTO td_tags (id,pagina,nome,tagpai,texto) VALUES (".$idTag.",{$idPagina},'{$tags["name"]}','{$tagpai}','{$texto}');";
 				//echo "<br>\n" . $sqlInsertTag;
 				$conn->exec($sqlInsertTag);

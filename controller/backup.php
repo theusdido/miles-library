@@ -33,7 +33,7 @@ function backup_tables($host,$user,$pass,$name)
                 $return.= 'INSERT INTO '.$table.' VALUES(';
                 for($j=0; $j < $num_fields; $j++)
                 {
-                    $row[$j] = addslashes(utf8charset($row[$j]));
+                    $row[$j] = addslashes(tdc::utf8($row[$j]));
                     if (isset($row[$j])) { $return.= '"'.$row[$j].'"' ; } else { $return.= '""'; }
                     if ($j < ($num_fields-1)) { $return.= ','; }
                 }

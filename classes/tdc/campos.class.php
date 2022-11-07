@@ -19,13 +19,13 @@
 		*/		
 		public static function TextoCurto($id,$nome,$descricao,$valor=null){		
 			$campo = tdClass::Criar("labeledit");
-			$campo->label->add(utf8charset($descricao));
+			$campo->label->add(tdc::utf8($descricao));
 			$campo->label->for = $id;
 			$campo->label->class = "control-label";
 			$campo->input->id = $id;
 			$campo->input->name = $nome;
 			$campo->input->class = "form-control input-sm texto-curto";
-			if (!empty($valor)) $campo->input->value = utf8charset($valor,4);	
+			if (!empty($valor)) $campo->input->value = tdc::utf8($valor);
 			return $campo;
 		}
 		/*  
@@ -37,13 +37,13 @@
 		*/	
 		public static function TextoMedio($id,$nome,$descricao,$valor=null){		
 			$campo = tdClass::Criar("labeledit");
-			$campo->label->add(utf8charset($descricao));
+			$campo->label->add(tdc::utf8($descricao));
 			$campo->label->for = $id;
 			$campo->label->class = "control-label";
 			$campo->input->id = $id;
 			$campo->input->name = $nome;
 			$campo->input->class = "form-control input-sm texto-medio";
-			if (!empty($valor)) $campo->input->value = utf8charset($valor,4);	
+			if (!empty($valor)) $campo->input->value = tdc::utf8($valor);	
 			return $campo;
 		}
 		/*  
@@ -55,13 +55,13 @@
 		*/	
 		public static function TextoLongo($id,$nome,$descricao,$valor=null){		
 			$campo = tdClass::Criar("labeledit");
-			$campo->label->add(utf8charset($descricao));
+			$campo->label->add(tdc::utf8($descricao));
 			$campo->label->for = $id;
 			$campo->label->class = "control-label";
 			$campo->input->id = $id;
 			$campo->input->name = $nome;
 			$campo->input->class = "form-control input-sm texto-longo";
-			if (!empty($valor)) $campo->input->value = utf8charset($valor,4);	
+			if (!empty($valor)) $campo->input->value = tdc::utf8($valor);
 			return $campo;
 		}	
 
@@ -74,13 +74,13 @@
 		*/	
 		public static function CPF($id,$nome,$descricao,$valor=null){
 			$campo = tdClass::Criar("labeledit");	
-			$campo->label->add(utf8charset($descricao));
+			$campo->label->add(tdc::utf8($descricao));
 			$campo->label->for 		= $id;
 			$campo->label->class 	= "control-label";
 			$campo->input->id 		= $id;
 			$campo->input->name 	= $nome;
 			$campo->input->class 	= "form-control input-sm formato-cpf";
-			if (!empty($valor)) $campo->input->value = utf8charset($valor,4);		
+			if (!empty($valor)) $campo->input->value = tdc::utf8($valor);
 			return $campo;
 		}
 		/*  
@@ -120,9 +120,9 @@
 			$label 						= tdClass::Criar("label");
 			$label->for 				= $id;
 			$label->class 				= "control-label";
-			$label->add(utf8charset($descricao));
+			$label->add(tdc::utf8($descricao));
 
-			if (!empty($valor)) $textarea->add(utf8charset($valor),4);
+			if (!empty($valor)) $textarea->add(tdc::utf8($valor));
 			$campo->add($label,$textarea);
 			return $campo;
 		}
@@ -133,16 +133,16 @@
 
 			Campo NumeroProcessoJudicial
 		*/
-		public static function NumeroProcessoJudicial($id,$descricao,$valor=null,$coluna_entidade,$coluna){
+		public static function NumeroProcessoJudicial($id,$descricao,$valor=null,$coluna_entidade = 0,$coluna = 0){
 			$campo = tdClass::Criar("labeledit");	
-			$campo->label->add(utf8charset($descricao));
+			$campo->label->add(tdc::utf8($descricao));
 			$campo->label->for = $id;
 			$campo->label->class = "control-label";
 			$campo->input->id = $id;
 			$campo->input->name = $id;
 			$campo->input->data_entidade = $coluna_entidade;
 			$campo->input->class = "form-control input-sm formato-numeroprocessojudicial";
-			if (!empty($valor)) $campo->input->value = utf8charset($valor,4);		
+			if (!empty($valor)) $campo->input->value = tdc::utf8($valor);
 			$jsCampo = tdClass::Criar("script");
 			if ($coluna==0) $campo->input->required = "true";
 			return $campo;	
@@ -150,13 +150,13 @@
 		public static function arquivo(){
 			$campo = tdClass::Criar("div");
 			$label = tdClass::Criar("label");
-			$label->add(utf8charset($descricao));
+			$label->add(tdc::utf8($descricao));
 			$campo->label->for = $id;
 			$campo->label->class = "control-label";
 			$campo->input->id = $id;
 			$campo->input->name = $nome;
 			$campo->input->class = "form-control input-sm texto-longo";
-			if (!empty($valor)) $campo->input->value = utf8charset($valor,4);	
+			if (!empty($valor)) $campo->input->value = tdc::utf8($valor);
 			return $campo;		
 		}
 		public static function filtro($nome,$descricao,$chaveestrangeira,$obrigatorio=null,$entidade="",$gd="",$modalName=""){
@@ -165,6 +165,9 @@
 				$modalName = "modal-" . $nome;
 			}
 			$entidadePK = tdClass::Criar("persistent",array(ENTIDADE,$chaveestrangeira));
+			if ($entidadePK->contexto == NULL){
+				return self::MsgFieldError('Chave estrangeira não encontrada no campo '.$nome.' [ '.$descricao.' ] !');
+			}
 			
 			$campo 					= tdClass::Criar("div");
 			$campo->class 			= "filtro-pesquisa form-group";
@@ -173,7 +176,7 @@
 			$label 					= tdClass::Criar("label");
 			$label->for 			= $nome;
 			$label->class 			= "control-label";
-			$label->add(utf8charset($descricao));
+			$label->add(tdc::utf8($descricao));
 
 			$input_group 			= tdClass::Criar("div");
 			$input_group->class 	= "input-group";
@@ -242,7 +245,7 @@
 			$campo->data_modalname = $modalName;
 
 			$label = tdClass::Criar("label");
-			$label->add(utf8charset($descricao));
+			$label->add(tdc::utf8($descricao));
 			$label->for = $nome;
 			$label->class = "control-label";				
 
@@ -375,7 +378,7 @@
 			$label = tdClass::Criar("label");
 			$label->for = $id;
 			$label->class = "control-label";
-			$label->add(utf8charset($descricao));
+			$label->add(tdc::utf8($descricao));
 			$select = tdClass::Criar("select");
 			$select->id = $id;
 			$select->name = $nome;
@@ -409,7 +412,7 @@
 			$label = tdClass::Criar("label");
 			$label->class = "control-label";
 			$label->for = $id;
-			$label->add(utf8charset($descricao));
+			$label->add(tdc::utf8($descricao));
 
 			$inputgroup = tdClass::Criar("div");
 			$inputgroup->class = "input-group componente-incdec";
@@ -448,12 +451,12 @@
 		*/
 		public static function NumeroDecimal($id,$descricao,$valor=null){
 			$campo = tdClass::Criar("labeledit");
-			$campo->label->add(utf8charset($descricao));
+			$campo->label->add(tdc::utf8($descricao));
 			$campo->label->for = $id;
 			$campo->label->class = "control-label";
 			$campo->input->id = $id;
 			$campo->input->class = "form-control input-sm formato-numerodecimal";
-			if (!empty($valor)) $campo->input->value = utf8charset($valor,4);	
+			if (!empty($valor)) $campo->input->value = tdc::utf8($valor);
 			return $campo;
 		}
 
@@ -466,12 +469,12 @@
 		*/
 		public static function Monetario($id,$descricao,$valor=null){
 			$campo = tdClass::Criar("labeledit");
-			$campo->label->add(utf8charset($descricao));
+			$campo->label->add(tdc::utf8($descricao));
 			$campo->label->for = $id;
 			$campo->label->class = "control-label";
 			$campo->input->id = $id;
 			$campo->input->class = "form-control input-sm formato-moeda";
-			if (!empty($valor)) $campo->input->value = utf8charset($valor,4);
+			if (!empty($valor)) $campo->input->value = tdc::utf8($valor);
 			return $campo;
 		}	
 
@@ -484,14 +487,29 @@
 		*/	
 		public static function Senha($id,$nome,$descricao,$valor=null){
 			$campo = tdClass::Criar("labeledit");
-			$campo->label->add(utf8charset($descricao));
+			$campo->label->add(tdc::utf8($descricao));
 			$campo->label->for = $id;
 			$campo->label->class = "control-label";
 			$campo->input->id = $id;
 			$campo->input->name = $nome;
 			$campo->input->type = 'password';
 			$campo->input->class = "form-control input-sm";
-			if (!empty($valor)) $campo->input->value = utf8charset($valor,4);
+			if (!empty($valor)) $campo->input->value = tdc::utf8($valor);
 			return $campo;
 		}
+		/*  
+			* Método MsgFieldError
+			* Data de Criacao: 07/11/2022
+			* Autor @theusdido
+
+			Exibe uma mensagem de erro na geração dos campos
+		*/	
+		private static function MsgFieldError($msg){
+			$alert 				= tdc::o('alert');
+			$alert->alinhar 		= 'left';
+			$alert->type			= 'alert-danger';
+			$alert->exibirfechar 	= false;
+			$alert->add($msg);
+			return $alert;
+		}		
 	}

@@ -62,6 +62,6 @@ final class SqlAtualizar extends sqlInstrucao{
 		if ($this->criterio){
 			$this->sql .= " WHERE " . $this->criterio->dump();
 		}
-		return utf8charset($this->sql);
+		return tdc::utf8($this->sql);
 	}	
 }

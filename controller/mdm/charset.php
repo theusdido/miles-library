@@ -22,7 +22,7 @@
 				$queryT = $conn->query($sqlT);
 				$linhaT = $queryT->fetchAll();
 				foreach($linhaT as $dado){
-					echo '<option value="'.$dado["id"].'">'. utf8charset($dado["descricao"]) .' [ '.$dado["nome"].' ]</option>';
+					echo '<option value="'.$dado["id"].'">'. tdc::utf8($dado["descricao"]) .' [ '.$dado["nome"].' ]</option>';
 				}
 			}else{
 				echo '<option value="descricao"> Descrição [ descricao ]</option>';

@@ -164,7 +164,7 @@
 			$empresa = Session::Get()->empresa;
 			$projeto = CURRENT_PROJECT_ID;
 			$ticket = tdClass::Read("id");
-			$descricao = utf8charset(tdClass::Read("descricao"));
+			$descricao = tdc::utf8(tdClass::Read("descricao"));
 			$data = date("Y-m-d H:i:s");
 			$usuario = Session::Get()->userid;
 			$sqlsalvarinterecao = "
@@ -692,8 +692,8 @@
 		if ($op == "salvarchamado"){
 
 			$numerochamado = getProxId("ticket",$connMILES);
-			$titulo = utf8charset(tdClass::Read("titulo"));
-			$descricao = utf8charset(tdClass::Read("descricao"));
+			$titulo = tdc::utf8(tdClass::Read("titulo"));
+			$descricao = tdc::utf8(tdClass::Read("descricao"));
 			$sql = "
 				INSERT INTO td_ticket (
 					id,

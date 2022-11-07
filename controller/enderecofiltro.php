@@ -42,7 +42,7 @@
 		$descricao = ($_GET["descricao"]);
 		$cidade = getIdCidade($_GET["cidade"],$_GET["uf"]);	
 
-		$sqlBairro = "SELECT id FROM td_imobiliaria_bairro WHERE nome = '".utf8charset($descricao)."' AND cidade = " . $cidade;
+		$sqlBairro = "SELECT id FROM td_imobiliaria_bairro WHERE nome = '".tdc::utf8($descricao)."' AND cidade = " . $cidade;
 		$queryBairro = $conn->query($sqlBairro);
 		if ($queryBairro->rowCount() <= 0){
 			$bairro = tdClass::Criar("persistent",array("td_imobiliaria_bairro"))->contexto;

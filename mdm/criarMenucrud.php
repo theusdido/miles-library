@@ -17,7 +17,7 @@
 	if (!empty($_POST)){
 		if ($_POST["op"] == "salvar"){
 			$id			 			= isset($_POST["id"])?$_POST["id"]:'';
-			$descricao				= utf8charset($_POST["descricao"]);
+			$descricao				= tdc::utf8($_POST["descricao"]);
 
 			if ($id == ""){
 				$query_prox = $conn->query("SELECT IFNULL(MAX(id),0)+1 FROM ".PREFIXO."menucrud");

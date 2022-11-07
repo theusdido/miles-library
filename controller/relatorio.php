@@ -58,7 +58,7 @@
 
 		$descricaorelatorio = tdClass::Criar("span");
 		$descricaorelatorio->id = "descricaorelatorio";
-		$descricaorelatorio->add("Relat&oacute;rio de " . utf8charset($entidadePrincipal->descricao,7));
+		$descricaorelatorio->add("Relat&oacute;rio de " . tdc::utf8($entidadePrincipal->descricao));
 
 		$hr = tdClass::Criar("hr");
 		$hr->class = "separadorcabecalho";
@@ -76,7 +76,7 @@
 		$trTitulo = tdClass::Criar("tabelalinha");
 		for($i=0;$i<$qtdeColunas;$i++){
 			$thTitulo = tdClass::Criar("tabelahead");
-			$thTitulo->add(utf8charset($camposDesc[$i],7));
+			$thTitulo->add(tdc::utf8($camposDesc[$i]));
 			$trTitulo->add($thTitulo);
 		}
 
@@ -95,9 +95,9 @@
 				$camponome = $campo_a[0];
 
 				if ($f[1] == "%" && $f[3] == "varchar"){
-					$where->addFiltro($camponome,"like",'%' . utf8charset($f[2],7) . '%');
+					$where->addFiltro($camponome,"like",'%' . tdc::utf8($f[2]) . '%');
 				}else{
-					$where->addFiltro($camponome,$f[1],utf8charset($f[2],7));
+					$where->addFiltro($camponome,$f[1],tdc::utf8($f[2]));
 				}
 			}
 		}

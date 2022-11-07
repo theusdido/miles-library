@@ -381,7 +381,7 @@
 			if ($atributo->contexto->chaveestrangeira == "" || $atributo->contexto->chaveestrangeira == 0){
 				$entidade 	= tdClass::Criar("persistent",array($_GET["entidade"],$_GET["termo"]));
 				$valorfinal = $entidade->contexto->{$atributo->contexto->nome};
-				echo utf8charset($valorfinal,5);
+				echo tdc::utf8($valorfinal);
 			}else{
 				// Entidade da chave estrangeira
 				$entidade_fk = tdClass::Criar("persistent",array(ENTIDADE,$atributo->contexto->chaveestrangeira));			
@@ -411,7 +411,7 @@
 						$entidade 		= tdClass::Criar("persistent",array($entidade_fk->contexto->nome,$_GET["termo"]));
 						$valorfinal 	= $entidade->contexto->{$atributo->contexto->nome};
 						if ($valorfinal != ''){
-							echo utf8charset($valorfinal,5);
+							echo tdc::utf8($valorfinal);
 						}else{
 							// Registro não encontrado
 							echo '';
@@ -889,15 +889,15 @@
 				exit;
 			}
 
-			$sqlDatabase = "SELECT * FROM ".CONNECTIONDATABASE." WHERE  id = " . (int)tdClass::Read("databaseid") . ";";
-			$queryDatabase = $connMILES->query($sqlDatabase);
-			$database = (object)$queryDatabase->fetch();
+			$sqlDatabase 	= "SELECT * FROM ".CONNECTIONDATABASE." WHERE  id = " . (int)tdClass::Read("databaseid") . ";";
+			$queryDatabase 	= $connMILES->query($sqlDatabase);
+			$database 		= (object)$queryDatabase->fetch();
 		
-			if (tdInstall::isInstalled($database)){
-				Session::append("currenttypedatabase",$tipo);
-				Session::append("currentproject",$projetocurrent->projectdiretorio);
-				Session::append("projeto",$projetocurrent->id);
-				Session::append("currentprojectname",$projetocurrent->nome);
+			if (tdInstall::isCreateDatabase($database)){
+				Session::append("currenttypedatabase"	,$tipo);
+				Session::append("currentproject"		,$projetocurrent->projectdiretorio);
+				Session::append("projeto"				,$projetocurrent->id);
+				Session::append("currentprojectname"	,$projetocurrent->nome);
 				echo 1;
 			}else{
 				echo 2;

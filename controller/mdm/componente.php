@@ -2,6 +2,7 @@
 
 	$entidade 		= tdc::e(tdc::r('entidade'));
 	$descricao_doc 	= $entidade->id . " - " . $entidade->descricao . "[ ".$entidade->nome." ]";
+	$_reset_files	= tdc::r('reset',false);
 	switch(tdc::r('op')){
 		case 'criarcadastro':
 			$path 		= PATH_FILES_CADASTRO . $entidade->id . "/";
@@ -15,6 +16,8 @@
 		case 'criarrelatorio':
 			$path 		= PATH_FILES_RELATORIO . tdc::r('id') . '/';	
 		break;
+		default:
+			$path = PATH_FILES_CADASTRO . $entidade->id . "/";
 	}
 
 	// Documentação
@@ -24,37 +27,49 @@
 
 	// Cria o diretório do registro caso não exista
 	if (!file_exists($path)){
-		mkdir($path,0777);
+		mkdir($path,0777,true);
 	}
 
-	// Seta permissão total para escrita no arquivo
-	chmod ($path, 0777);
+	// Nome do arquivo HTML principal
+	$_filename_html 	= tdc::r('filename'		,$entidade->nome . '.html');
+	$_filename_htm 		= tdc::r('filenamehtm'	,$entidade->nome . '.htm');
+	$_filename_css 		= tdc::r('filenamecss'	,$entidade->nome . '.css');
+	$_filename_js 		= tdc::r('filenamejs'	,$entidade->nome . '.js');
+
+	$_full_filename_html	= $path . $_filename_html;
+	$_full_filename_htm		= $path . $_filename_htm;
+	$_full_filename_css		= $path . $_filename_css;
+	$_full_filename_js		= $path . $_filename_js;
+
+	if ((bool)$_reset_files){
+		if (file_exists($_full_filename_html)) 	unlink($_full_filename_html);
+		if (file_exists($_full_filename_htm)) 	unlink($_full_filename_htm);
+		if (file_exists($_full_filename_css))	unlink($_full_filename_css);
+		if (file_exists($_full_filename_js)) 	unlink($_full_filename_js);
+	}
 
 	// Cria o arquivo HTML
-	$fp = fopen($path . tdc::r('filename') ,'w');
-	fwrite($fp,htmlespecialcaracteres($_POST["html"],1));
+	$fp = fopen($_full_filename_html ,'w');
+	fwrite($fp,htmlespecialcaracteres(isset($_POST["html"])?$_POST["html"]:'',1));
 	fclose($fp);
 
-	// Cria o arquivo HTML Embutido Dinâmico
-	$dhtmlFile = $path . tdc::r('filenamehtm');
-	if (!file_exists($dhtmlFile)){
-		$fp = fopen($dhtmlFile,'w');
+	// Cria o arquivo HTML Embutido Dinâmico	
+	if (!file_exists($_full_filename_html)){
+		$fp = fopen($_full_filename_html,'w');
 		fwrite($fp,"<!--\n * HTML Personalizado \n {$datacriacaodoc} \n {$authordoc} \n {$paginadoc} \n\n Escreve seu código HTML personalizado aqui! \n-->\n");
 		fclose($fp);
 	}	
 
 	// Cria o arquivo CSS
-	$cssFile = $path . tdc::r('filenamecss');
-	if (!file_exists($cssFile)){
-		$fp = fopen($cssFile ,'w');
+	if (!file_exists($_full_filename_css)){
+		$fp = fopen($_full_filename_css ,'w');
 		fwrite($fp,"/*\n * CSS Personalizado \n {$datacriacaodoc} \n {$authordoc} \n {$paginadoc} \n\n Escreve seu código CSS personalizado aqui! \n*/\n");
 		fclose($fp);
 	}
 
 	// Cria o arquivo JS
-	$jsFile = $path . tdc::r('filenamejs');
-	if (!file_exists($jsFile)){
-		$fp = fopen($jsFile ,'w');
+	if (!file_exists($_full_filename_js)){
+		$fp = fopen($_full_filename_js ,'w');
 		fwrite($fp,"/*\n * JS Personalizado \n {$datacriacaodoc} \n {$authordoc} \n {$paginadoc} \n */\n\n");
 		fwrite($fp,"// Invocado ao clicar no botão Novo");
 		fwrite($fp,"\n");
@@ -132,5 +147,14 @@
 		fclose($fp);
 	}
 
+	// Seta permissão total para escrita no arquivo
+	chmod($path, 				0777);
+	chmod($_full_filename_html,	0777);
+	chmod($_full_filename_htm, 	0777);
+	chmod($_full_filename_css, 	0777);
+	chmod($_full_filename_js, 	0777);
+
 	// Cria o MDM File JavaScript Compile
 	include 'javascriptfile.php';
+
+	

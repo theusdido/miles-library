@@ -31,6 +31,7 @@ class Pagina Extends Html {
 	private $config;
 	public $showMultiSelect			= true;
 	private $title					= '';
+	private $favicon				= null;
 
 	/*  
 		* Método construct 
@@ -75,14 +76,9 @@ class Pagina Extends Html {
 		$meta_robots 			= tdClass::Criar("meta");
 		$meta_robots->name	 	= "robots";
 		$meta_robots->content 	= "noindex, nofollow";
-		
-		$favicon 		= tdClass::Criar("link");
-		$favicon->id 	= "favicon";
-		$favicon->rel 	= "icon";
-		$favicon->href 	= PATH_CURRENT_FAVICON;
 
 		$this->setTitle();
-		$this->head->add($meta_charset,$meta_viewport,$meta_robots,$favicon,$bootstrap);
+		$this->head->add($meta_charset,$meta_viewport,$meta_robots,$bootstrap);
 		$this->body->add($jquery,$bootstrap_js);
 		
 		// Javascript inicial da página
@@ -144,22 +140,20 @@ class Pagina Extends Html {
 		
 		if ($this->showCSSTheme){
 			if (file_exists(PATH_CURRENT_PROJECT_THEME)){
-				$cf 				= getCurrentConfigFile();
-				$tema 				= tdClass::Criar("link");
-				$tema->href 		=  URL_CURRENT_PROJECT_THEME . 'geral.css';
-				$tema->rel 			= 'stylesheet';
-				$this->head->add($tema);
+				$tema 			= tdClass::Criar("link");
+				$tema->href 	=  URL_CURRENT_PROJECT_THEME . 'geral.css';
+				$tema->rel 		= 'stylesheet';				
+			}else{
+				$tema 			= tdClass::Criar("link");
+				$tema->href 	= URL_SYSTEM_THEME . 'geral.css';
+				$tema->rel 		= 'stylesheet';	
 			}
 
-			$tema_default 			= tdClass::Criar("link");
-			$tema_default->href 	= URL_SYSTEM_THEME . 'geral.css';
-			$tema_default->rel 		= 'stylesheet';
-			
 			$gradededadosCSS 		= tdClass::Criar("link");
 			$gradededadosCSS->href 	= URL_SYSTEM_THEME . 'gradesdedados.css';
-			$gradededadosCSS->rel 	= 'stylesheet';			
-			
-			$this->head->add($tema_default,$gradededadosCSS);
+			$gradededadosCSS->rel 	= 'stylesheet';
+
+			$this->head->add($tema,$gradededadosCSS);
 		}
 		
 		if ($this->showJSParticularidades){
@@ -268,6 +262,7 @@ class Pagina Extends Html {
 		$title->add($this->getTitle());
 		$this->head->add($title);
 
+		if ($this->favicon == null) $this->setFavIcon();
 		if ($this->ishtml5) echo "<!DOCTYPE html>";
 		parent::add($this->head);	
 		parent::add($this->body);
@@ -390,4 +385,54 @@ class Pagina Extends Html {
 			$this->title = $title;
 		}
 	}
+
+	/*  
+		* Método addBody
+	    * Data de Criacao: 03/11/2022
+	    * Autor @theusdido
+
+		Adiciona conteúdo no corpo da página
+	*/
+	public function addBody($conteudo){
+		$this->body->add($conteudo);
+	}
+
+	/*  
+		* Método addHead
+	    * Data de Criacao: 03/11/2022
+	    * Autor @theusdido
+
+		Adiciona conteúdo no cabeçalho da página
+	*/
+	public function addHead($conteudo){
+		$this->head->add($conteudo);
+	}
+
+	/*
+		* Método getFavIcon
+	    * Data de Criacao: 03/11/2022
+	    * Autor @theusdido
+
+		Retorna o elemento html do Favicon
+	*/
+	public function getFavIcon(){
+		return $this->favicon;
+	}
+
+	/*
+		* Método setFavIcon
+	    * Data de Criacao: 03/11/2022
+	    * Autor @theusdido
+
+		Retorna o elemento html do Favicon
+	*/
+	public function setFavIcon($url = ''){
+		$favicon 		= tdClass::Criar("link");
+		$favicon->id 	= "favicon";
+		$favicon->rel 	= "icon";
+		$favicon->href 	= $url == '' ? URL_FAVICON : $url;
+		$this->head->add($favicon);
+		$this->favicon 	= $favicon;
+	}
+
 }

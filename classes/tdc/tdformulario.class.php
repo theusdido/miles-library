@@ -112,7 +112,7 @@ class TdFormulario Extends Elemento {
 			switch($coluna->tipohtml){
 				// Campo de Texto ( Longo )
 				case "3":
-					$campo = Campos::TextoLongo($coluna->nome,$coluna->nome,utf8charset($coluna->descricao,7),$initialValue);
+					$campo = Campos::TextoLongo($coluna->nome,$coluna->nome,tdc::utf8($coluna->descricao),$initialValue);
 					$campo->label->add($asteriscoobrigatorio);
 					$campo->input->data_entidade = $entidadeCOL;
 					if ($this->fp != "") $campo->input->class = $this->fp;
@@ -127,7 +127,7 @@ class TdFormulario Extends Elemento {
 					$label = tdClass::Criar("label");
 					$label->for = $coluna->nome;
 					$label->class = "control-label";
-					$label->add(utf8charset($coluna->descricao,7));
+					$label->add(tdc::utf8($coluna->descricao));
 					$label->add($asteriscoobrigatorio);
 					$select = tdClass::Criar("select");
 					$select->class = "form-control input-sm " . ($this->fp != ""?$this->fp:"");
@@ -174,7 +174,7 @@ class TdFormulario Extends Elemento {
 					$label = tdClass::Criar("label");
 					$label->for = $coluna->nome;
 					$label->class = "control-label";
-					$label->add(utf8charset($coluna->descricao,7));
+					$label->add(tdc::utf8($coluna->descricao));
 					$label->add($asteriscoobrigatorio);
 					$select = tdClass::Criar("select");
 					$select->class = "form-control input-sm " . ($this->fp != ""?$this->fp:"");
@@ -207,7 +207,7 @@ class TdFormulario Extends Elemento {
 				break;				
 				// Campo Senha
 				case "6":
-					$campo->label->add(utf8charset($coluna->descricao,7));
+					$campo->label->add(tdc::utf8($coluna->descricao));
 					$campo->label->for = $coluna->nome;
 					$campo->label->class = "control-label";
 					$campo->label->add($asteriscoobrigatorio);
@@ -225,7 +225,7 @@ class TdFormulario Extends Elemento {
 				break;
 				// Checkbox
 				case "7":
-					$campo->label->add(utf8charset($coluna->descricao,7));
+					$campo->label->add(tdc::utf8($coluna->descricao));
 					$campo->label->for = $coluna->nome;
 					$campo->label->class = "control-label";
 					$campo->label->add($asteriscoobrigatorio);
@@ -245,7 +245,7 @@ class TdFormulario Extends Elemento {
 					$sim = tdClass::Criar("label");
 					$sim->class="btn btn-default checkbox-s ";
 
-					$sim->add($coluna->labelumcheckbox==""?"Sim":utf8charset($coluna->labelumcheckbox,7));
+					$sim->add($coluna->labelumcheckbox==""?"Sim":tdc::utf8($coluna->labelumcheckbox,7));
 					$sim->onclick = "$('#{$coluna->nome}[data-entidade={$entidadeCOL}]').val(1);";
 					$sim_input = tdClass::Criar("input");
 					$sim_input->type="radio"; 
@@ -258,7 +258,7 @@ class TdFormulario Extends Elemento {
 
 					$nao = tdClass::Criar("label");
 					$nao->class="btn btn-default checkbox-n ";
-					$nao->add($coluna->labelzerocheckbox==""?"Sim":utf8charset($coluna->labelzerocheckbox,7));
+					$nao->add($coluna->labelzerocheckbox==""?"Sim":tdc::utf8($coluna->labelzerocheckbox,7));
 					$nao->onclick = "$('#{$coluna->nome}[data-entidade={$entidadeCOL}]').val(0);";
 					$nao_input = tdClass::Criar("input");
 					$nao_input->type="radio"; 
@@ -283,7 +283,7 @@ class TdFormulario Extends Elemento {
 				break;
 				// Telefone (xx) xxxx-xxxxx
 				case "8":
-					$campo->label->add(utf8charset($coluna->descricao,7));
+					$campo->label->add(tdc::utf8($coluna->descricao));
 					$campo->label->for = $coluna->nome;
 					$campo->label->class = "control-label";
 					$campo->label->add($asteriscoobrigatorio);
@@ -300,7 +300,7 @@ class TdFormulario Extends Elemento {
 				break;
 				// CEP (xxxxx-xxx)
 				case "9":
-					$campo->label->add(utf8charset($coluna->descricao,7));
+					$campo->label->add(tdc::utf8($coluna->descricao));
 					$campo->label->for = $coluna->nome;
 					$campo->label->class = "control-label";
 					$campo->label->add($asteriscoobrigatorio);
@@ -317,7 +317,7 @@ class TdFormulario Extends Elemento {
 				break;
 				// CPF (xxx.xxx.xxx-xx)
 				case "10":
-					$campo = Campos::CPF($coluna->nome,$coluna->nome,utf8charset($coluna->descricao,7),$initialValue);
+					$campo = Campos::CPF($coluna->nome,$coluna->nome,tdc::utf8($coluna->descricao),$initialValue);
 					$campo->input->data_entidade = $entidadeCOL;
 					$campo->label->add($asteriscoobrigatorio);
 					if ($this->fp != "") $campo->input->class = $this->fp;
@@ -335,7 +335,7 @@ class TdFormulario Extends Elemento {
 					$input_group->class = "input-group calendar-picker-group " ;
 					
 					$label = tdClass::Criar("label");					
-					$label->add(utf8charset($coluna->descricao,7));
+					$label->add(tdc::utf8($coluna->descricao));
 					$label->add($asteriscoobrigatorio);
 					$label->for = $coluna->nome;
 					$label->class = "control-label";
@@ -370,7 +370,7 @@ class TdFormulario Extends Elemento {
 				break;
 				// E-Mail
 				case "12":
-					$campo->label->add(utf8charset($coluna->descricao,7));
+					$campo->label->add(tdc::utf8($coluna->descricao));
 					$campo->label->for = $coluna->nome;
 					$campo->label->class = "control-label";
 					$campo->label->add($asteriscoobrigatorio);
@@ -387,7 +387,7 @@ class TdFormulario Extends Elemento {
 				break;
 				// Monetário R$
 				case "13":
-					$campo->label->add(utf8charset($coluna->descricao,7));
+					$campo->label->add(tdc::utf8($coluna->descricao));
 					$campo->label->for = $coluna->nome;
 					$campo->label->class = "control-label";
 					$campo->label->add($asteriscoobrigatorio);
@@ -404,7 +404,7 @@ class TdFormulario Extends Elemento {
 				break;
 				// Área de Texto
 				case "14":
-					$campo = Campos::TextArea($coluna->nome,$coluna->nome,utf8charset($coluna->descricao,7),$initialValue,$entidadeCOL);
+					$campo = Campos::TextArea($coluna->nome,$coluna->nome,tdc::utf8($coluna->descricao),$initialValue,$entidadeCOL);
 					$campo->getFilhos()[0]->add($asteriscoobrigatorio); # Filho é o label
 					$campo->data_entidade = $entidadeCOL;
 					if ($this->fp != "") $campo->class = $this->fp;
@@ -414,7 +414,7 @@ class TdFormulario Extends Elemento {
 				break;
 				// CNPJ (xx.xxx.xxx/xxxx-xx)
 				case "15":
-					$campo->label->add(utf8charset($coluna->descricao,7));
+					$campo->label->add(tdc::utf8($coluna->descricao));
 					$campo->label->for = $coluna->nome;
 					$campo->label->class = "control-label";
 					$campo->label->add($asteriscoobrigatorio);
@@ -440,7 +440,7 @@ class TdFormulario Extends Elemento {
 				break;
 				// CPFJ ( Cpf e Cnpj )
 				case "17":
-					$campo->label->add(utf8charset($coluna->descricao,7));
+					$campo->label->add(tdc::utf8($coluna->descricao));
 					$campo->label->for = $coluna->nome;
 					$campo->label->class = "control-label";
 					$campo->label->add($asteriscoobrigatorio);
@@ -457,7 +457,7 @@ class TdFormulario Extends Elemento {
 				break;
 				// Número Processo Judicial
 				case "18":					
-					$campo = Campos::NumeroProcessoJudicial($coluna->nome,utf8charset($coluna->descricao,7),$initialValue,$entidadeCOL,$coluna->nulo);
+					$campo = Campos::NumeroProcessoJudicial($coluna->nome,tdc::utf8($coluna->descricao),$initialValue,$entidadeCOL,$coluna->nulo);
 					$campo->label->add($asteriscoobrigatorio);
 					if ($this->fp != "") $campo->input->class = $this->fp;
 					if ($coluna->exibirgradededados ==1) $campo->input->class = $this->gd;
@@ -472,7 +472,7 @@ class TdFormulario Extends Elemento {
 					$label = tdClass::Criar("label");
 					$label->for = $coluna->nome;
 					$label->class = "control-label";
-					$label->add(utf8charset($coluna->descricao,7));
+					$label->add(tdc::utf8($coluna->descricao));
 					$label->add($asteriscoobrigatorio);
 					
 					$input = Campos::Oculto($coluna->nome,$coluna->nome,'');
@@ -521,7 +521,7 @@ class TdFormulario Extends Elemento {
 					$input_group->class = "input-group ckeditor-group " ;
 					
 					$label = tdClass::Criar("label");
-					$label->add(utf8charset($coluna->descricao,7));
+					$label->add(tdc::utf8($coluna->descricao));
 					$label->for = $coluna->nome;
 					$label->class = "control-label";
 					$label->add($asteriscoobrigatorio);
@@ -567,7 +567,7 @@ class TdFormulario Extends Elemento {
 				break;
 				// Filtro
 				case "22":
-					$campo = Campos::filtro($coluna->nome,utf8charset($coluna->descricao,7),$coluna->chaveestrangeira,$asteriscoobrigatorio,$entidadeCOL
+					$campo = Campos::filtro($coluna->nome,tdc::utf8($coluna->descricao),$coluna->chaveestrangeira,$asteriscoobrigatorio,$entidadeCOL
 					,($coluna->exibirgradededados == 1 )?$this->gd:""
 					,"myModal-" . $entidadeCOL . "-" . $coluna->nome
 					);
@@ -585,7 +585,7 @@ class TdFormulario Extends Elemento {
 				// Data e Hora
 				case "23":
 				
-					$campo->label->add(utf8charset($coluna->descricao,7));
+					$campo->label->add(tdc::utf8($coluna->descricao));
 					$campo->label->for = $coluna->nome;
 					$campo->label->class = "control-label";
 					$campo->label->add($asteriscoobrigatorio);
@@ -602,7 +602,7 @@ class TdFormulario Extends Elemento {
 				break;
 				// Filtro ( Endereço Google )
 				case "24":				
-					$campo = Campos::filtroEnderecoFiltro($coluna->nome,utf8charset($coluna->descricao,7),$coluna->chaveestrangeira,$asteriscoobrigatorio,$entidadeCOL
+					$campo = Campos::filtroEnderecoFiltro($coluna->nome,tdc::utf8($coluna->descricao),$coluna->chaveestrangeira,$asteriscoobrigatorio,$entidadeCOL
 						,($this->fp != "")?$this->fp:""
 						,($coluna->exibirgradededados ==1 )?$this->gd:""
 						,$coluna->id
@@ -614,7 +614,7 @@ class TdFormulario Extends Elemento {
 				case "25":
 
 					$campo = tdClass::Criar("div");
-					$input = Campos::TextoLongo($coluna->nome,$coluna->nome,utf8charset($coluna->descricao,7),$initialValue);
+					$input = Campos::TextoLongo($coluna->nome,$coluna->nome,tdc::utf8($coluna->descricao),$initialValue);
 					$input->label->add($asteriscoobrigatorio);
 					$input->input->data_entidade = $entidadeCOL;
 					$input->input->class = "formato-numerointeiro";
@@ -629,7 +629,7 @@ class TdFormulario Extends Elemento {
 				// Número ( Decimal )
 				case "26":
 					$campo = tdClass::Criar("div");
-					$input = Campos::TextoLongo($coluna->nome,$coluna->nome,utf8charset($coluna->descricao,7),$initialValue);
+					$input = Campos::TextoLongo($coluna->nome,$coluna->nome,tdc::utf8($coluna->descricao),$initialValue);
 					$input->label->add($asteriscoobrigatorio);
 					$input->input->data_entidade = $entidadeCOL;
 					$input->input->class = "formato-numerodecimal";
@@ -650,7 +650,7 @@ class TdFormulario Extends Elemento {
 					$input_group->class = "input-group multilinha-group " ;
 					
 					$label = tdClass::Criar("label");
-					$label->add(utf8charset($coluna->descricao,7));
+					$label->add(tdc::utf8($coluna->descricao));
 					$label->for = $coluna->nome;
 					$label->class = "control-label";
 					$label->add($asteriscoobrigatorio);
@@ -693,7 +693,7 @@ class TdFormulario Extends Elemento {
 				// Hora
 				case "28":
 					$campo = tdClass::Criar("div");
-					$input = Campos::TextoLongo($coluna->nome,$coluna->nome,utf8charset($coluna->descricao,7),$initialValue);
+					$input = Campos::TextoLongo($coluna->nome,$coluna->nome,tdc::utf8($coluna->descricao),$initialValue);
 					$input->label->add($asteriscoobrigatorio);
 					$input->input->data_entidade = $entidadeCOL;
 					$input->input->class = "formato-hora";
@@ -707,7 +707,7 @@ class TdFormulario Extends Elemento {
 				break;
 				// Referência ( Mês/Ano )
 				case "29":
-					$campo->label->add(utf8charset($coluna->descricao,7));
+					$campo->label->add(tdc::utf8($coluna->descricao));
 					$campo->label->for = $coluna->nome;
 					$campo->label->class = "control-label";
 					$campo->label->add($asteriscoobrigatorio);
@@ -724,7 +724,7 @@ class TdFormulario Extends Elemento {
 				break;
 				// Is Null e Is Empty
 				case "30":
-					$campo->label->add(utf8charset($coluna->descricao,7));
+					$campo->label->add(tdc::utf8($coluna->descricao));
 					$campo->label->for = $coluna->nome;
 					$campo->label->class = "control-label";
 					$campo->label->add($asteriscoobrigatorio);
@@ -744,7 +744,7 @@ class TdFormulario Extends Elemento {
 					$sim = tdClass::Criar("label");
 					$sim->class="btn btn-default checkbox-s ";
 
-					$sim->add(utf8charset("Sim"));
+					$sim->add(tdc::utf8("Sim"));
 					$sim->onclick = "$('#{$coluna->nome}[data-entidade={$entidadeCOL}]').val(1);";
 					$sim_input = tdClass::Criar("input");
 					$sim_input->type="radio"; 
@@ -757,7 +757,7 @@ class TdFormulario Extends Elemento {
 
 					$nao = tdClass::Criar("label");
 					$nao->class="btn btn-default checkbox-n ";
-					$nao->add(utf8charset("Não"));
+					$nao->add(tdc::utf8("Não"));
 					$nao->onclick = "$('#{$coluna->nome}[data-entidade={$entidadeCOL}]').val(0);";
 					$nao_input = tdClass::Criar("input");
 					$nao_input->type="radio"; 
@@ -771,7 +771,7 @@ class TdFormulario Extends Elemento {
 					$campo->add($br,$grupo_btn);
 				break;				
 				default:
-					$campo->label->add(utf8charset($coluna->descricao,7));
+					$campo->label->add(tdc::utf8($coluna->descricao));
 					$campo->label->for = $coluna->nome;
 					$campo->label->class = "control-label";
 					$campo->label->add($asteriscoobrigatorio);
@@ -791,7 +791,7 @@ class TdFormulario Extends Elemento {
 			// Legenda
 			if ($coluna->legenda!=""){
 				$legenda = tdClass::Criar("small");
-				$legenda->add(' <small>( ' . utf8charset($coluna->legenda,7) . ' )</small> ');
+				$legenda->add(' <small>( ' . tdc::utf8($coluna->legenda) . ' )</small> ');
 				if (isset($label)){
 					$label->add($legenda);
 				}else if(isset($campo->label)){	
@@ -949,7 +949,7 @@ class TdFormulario Extends Elemento {
 				$queryAttr = $conn->query($sqlAttr);
 				$dados_array = "";
 				while ($linhaAttr = $queryAttr->fetch()){
-					$dados_array[$linhaAttr["nome"]] = utf8charset($linha[$linhaAttr["nome"]]);
+					$dados_array[$linhaAttr["nome"]] = tdc::utf8($linha[$linhaAttr["nome"]]);
 				}				
 				$retorno["entidade"] = $entidadeID;
 				$retorno["dados"] = $dados_array;
@@ -1044,11 +1044,11 @@ class TdFormulario Extends Elemento {
 	*/
 	private function initialValue($coluna){
 		if ($coluna->inicializacao != ''){
-			return utf8charset($coluna->inicializacao);
+			return tdc::utf8($coluna->inicializacao);
 		}
 		if (sizeof($this->dados) > 0){
 			if (isset($this->dados[0]->{$coluna->nome})){
-				return utf8charset($this->dados[0]->{$coluna->nome});
+				return tdc::utf8($this->dados[0]->{$coluna->nome});
 			}
 		}
 

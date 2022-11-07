@@ -1,9 +1,10 @@
 <?php
-	// Caminho do Favicon do projeto
-	define("FILE_CURRENT_FAVICON",isset($config["FAVICON"])?$config["FAVICON"]:'favicon.png');
 
 	// Nome do arquivo do Favicon do sistema
-	define('FILE_FAVICON','logo-favicon.png');
+	define('FILE_FAVICON','favicon.png');
+
+	// Caminho do Favicon do projeto
+	define("FILE_CURRENT_FAVICON",isset($config["FAVICON"])?$config["FAVICON"]:FILE_FAVICON);
 
 	// Logo Padrão
 	define("FILE_LOGO", 'logo.png');
@@ -25,9 +26,9 @@
 
     define('PATH_CURRENT_FAVICON', PATH_CURRENT_PROJECT_THEME . FILE_CURRENT_FAVICON);  
 
-	define('FILE_SYSTEM_FAVICON', URL_SYSTEM_THEME . "logo-favicon.png");
+	define('FILE_SYSTEM_FAVICON', URL_SYSTEM_THEME . FILE_FAVICON);
 
-	define('URL_NOIMAGE', URL_CORE . 'assets/img/noimage.png');
+	define('URL_NOIMAGE', URL_MILES . 'assets/img/noimage.png');
 
 	define('FILE_BACKGROUND','background.jpg');
 

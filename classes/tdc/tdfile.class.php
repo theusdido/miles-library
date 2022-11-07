@@ -155,4 +155,19 @@ class tdFile {
 			}
 		}
 	}
+
+	/*
+		* Método move
+	    * Data de Criacao: 06/11/2022
+	    * Author
+
+		Move arquivo, comando copy
+		@origem: path origem
+		@destino: path destino
+	*/
+	public static function move($origem,$destino){
+		$handle = copy($origem , $destino);
+		$chmod 	= chmod($destino, 0777);
+		return $handle;
+	}
 }

@@ -41,7 +41,7 @@
                 $para = tdc::p($para_entidade);
                 foreach($linha as $key => $value){
                     
-                    $value      = utf8charset($value,6);
+                    $value      = tdc::utf8($value,6);
                     $field_old  = $key;
                     $field_new  = str_replace('td_','',$key);
 

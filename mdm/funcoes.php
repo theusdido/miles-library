@@ -1,17 +1,9 @@
 <?php
 	include_once 'conexao.php';
-
-	$request_schema = isset($_SERVER["HTTP_X_FORWARDED_PROTO"])?$_SERVER["HTTP_X_FORWARDED_PROTO"]:$_SERVER["REQUEST_SCHEME"];
-	$protocolo = 'http' . '://';
-	if ($_SERVER["HTTP_HOST"] == "localhost" || $_SERVER["HTTP_HOST"] == "127.0.0.1"){
-		$host = $protocolo . 'localhost/' . $config["PROJETO_FOLDER"];
-	}else{
-		$host = $protocolo . $_SERVER["HTTP_HOST"] . '/miles/';
-	}
 	
 	function executefunction($function,$parms){
 
-		if ($function == "utf8charset"){
+		if ($function == "tdc::utf8"){
 			if (isutf8($parms[0])){
 				if (isset($parms[1])){
 					return conversionCharset($parms[0],$parms[1]);

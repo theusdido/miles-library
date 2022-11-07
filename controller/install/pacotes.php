@@ -1,2 +1,2 @@
 <?php     
-    include 'core/install/instalacaosistema.php';
+    include PATH_MILES . 'install/instalacaosistema.php';

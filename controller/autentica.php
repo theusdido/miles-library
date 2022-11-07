@@ -3,7 +3,7 @@
 		$login = tdc::r("login");
 		$senha = tdc::r("senha");
 
-		if (($login!="") and ($senha!="")){
+		if (($login != '') && ($senha != '')){
 			$sqlCriterio1 = tdClass::Criar("sqlcriterio");
 			$sqlCriterio2 = tdClass::Criar("sqlcriterio");
 

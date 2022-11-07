@@ -1,17 +1,9 @@
 <?php
-
-	$install 	= tdc::ru('td_instalacao');
+	
     $op 		= tdc::r('op');
 
 	if (!$conn || $conn == 'NULL'){
-		$conn = Conexao::getConnection(
-			$_SESSION["db_type"],
-			$_SESSION["db_host"],
-			$_SESSION["db_base"],
-			$_SESSION["db_user"],
-			$_SESSION["db_password"],
-			$_SESSION["db_port"]
-		);
+		$conn = Conexao::getTemp();
 	}
     switch($op){
         case 'instalar':
@@ -22,17 +14,18 @@
                 }
             }
 
-			include 'core/controller/install/criarestruturapastas.php';
-			include 'core/controller/install/criarmysqlini.php';
-			include 'core/controller/install/criarcurrentconfig.php';
+			include PATH_MILES_LIBRARY . 'controller/install/criarestruturapastas.php';
+			include PATH_MILES_LIBRARY . 'controller/install/criarmysqlini.php';
+			include PATH_MILES_LIBRARY . 'controller/install/criarcurrentconfig.php';
             echo 1;
         break;
         case 'instrucao':
-            include 'core/install/' . tdc::r("instrucao");
+            include PATH_MILES_LIBRARY . 'install/' . tdc::r("instrucao");
             echo 1;
         break;
         case 'projeto':
-			$projeto_nome = tdc::r('nome');
+			$install 		= tdc::ru('td_instalacao');
+			$projeto_nome 	= tdc::r('nome');
 			if ($projeto_nome != ''){
 				if ($install->sistemainstalado){
 					$sql 	= "UPDATE " . PROJETO . " SET nome = '{$projeto_nome}' WHERE id = 1;";
@@ -42,7 +35,7 @@
 				$query 	= $conn->exec($sql);
 				if ($query){
 					echo 1;
-				}		
+				}
 			}
         break;
         case 'inserirregistros':
@@ -204,7 +197,7 @@
             */
         break;
 		case 'versao':
-			include 'core/controller/install/version.php';
+			include PATH_MILES_LIBRARY . 'controller/install/version.php';
 		break;
     }
 

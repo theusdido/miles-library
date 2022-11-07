@@ -19,7 +19,7 @@
 		$aftersavejs			 			= isset($_POST["aftersavejs"])?$_POST["aftersavejs"]:'';
 		$beforesavejs			 			= isset($_POST["beforesavejs"])?$_POST["beforesavejs"]:'';
 		$onloadjs			 				= isset($_POST["onloadjs"])?$_POST["onloadjs"]:'';
-		$sql = 'UPDATE ' . PREFIXO . 'entidade SET aftersavejs = "'.utf8charset(trim(mysql_real_escape_string($aftersavejs))).'",beforesavejs = "'.utf8charset(trim(mysql_real_escape_string($beforesavejs))).'",onloadjs = "'.utf8charset(trim(mysql_real_escape_string($onloadjs))).'"  WHERE id = '.$id;		
+		$sql = 'UPDATE ' . PREFIXO . 'entidade SET aftersavejs = "'.tdc::utf8(trim(mysql_real_escape_string($aftersavejs))).'",beforesavejs = "'.tdc::utf8(trim(mysql_real_escape_string($beforesavejs))).'",onloadjs = "'.tdc::utf8(trim(mysql_real_escape_string($onloadjs))).'"  WHERE id = '.$id;		
 		$query = $conn->query($sql);
 		header("Location: criarAcoes.php?entidade=" . $id);
 	}

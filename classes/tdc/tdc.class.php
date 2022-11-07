@@ -423,7 +423,10 @@ class tdc Extends tdClass{
 	*/
 	public static function wj($message)
 	{
-		echo json_encode($message);
+		echo json_encode($message,JSON_PARTIAL_OUTPUT_ON_ERROR);
+		if (IS_SHOW_ERROR_MESSAGE && json_last_error() != JSON_ERROR_NONE){
+			Debug::Console(JSON_ERROR_NONE. "\n\n" . $message,'TCC::WJ');
+		}
 	}
 
 	public static function utf8($str){

@@ -8,7 +8,9 @@
 	float:right;
 	margin:3px 0 0 5px;
 	display:none;
-}			
+	width:30px;
+	height: 30px;
+}
 #guiafrasetopo{
 	float:right;
 	color:#DDD;

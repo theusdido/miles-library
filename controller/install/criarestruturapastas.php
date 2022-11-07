@@ -1,18 +1,16 @@
 <?php
-    include_once 'core/classes/tdc/tdfile.class.php';
 
-    $path_root_project          = 'project';
-    $path_current_arquivos      = $path_root_project.'arquivos/';    
-    $path_current_build         = $path_root_project.'build/';
-    $path_current_classe        = $path_root_project.'classes/';
-    $path_current_config        = $path_root_project.'config/';    
-    $path_current_controller    = $path_root_project.'controller/';
-    $path_current_files         = $path_root_project.'files/';
-    $path_current_imagens       = $path_root_project.'imagens/';
-    $path_current_tema          = $path_root_project.'tema/';
-    $path_current_view          = $path_root_project.'view/';
-    $path_current_website       = $path_root_project.'website/';
-    $path_current_log           = $path_root_project.'log/';
+    $path_current_arquivos      = PATH_PROJECT.'arquivos/';    
+    $path_current_build         = PATH_PROJECT.'build/';
+    $path_current_classe        = PATH_PROJECT.'classes/';
+    $path_current_config        = PATH_PROJECT.'config/';    
+    $path_current_controller    = PATH_PROJECT.'controller/';
+    $path_current_files         = PATH_PROJECT.'files/';
+    $path_current_imagens       = PATH_PROJECT.'imagens/';
+    $path_current_tema          = PATH_PROJECT.'tema/';
+    $path_current_view          = PATH_PROJECT.'view/';
+    $path_current_website       = PATH_PROJECT.'website/';
+    $path_current_log           = PATH_PROJECT.'log/';
 
     $path_current_arquivos_temp         = $path_current_arquivos   .'temp/';
     $path_current_build_js              = $path_current_build      .'js/';
@@ -24,44 +22,43 @@
     $path_current_tema_desktop          = $path_current_tema       .'desktop/';
     $path_current_tema_padrao           = $path_current_tema       .'padrao/';
 
-    tdFile::mkdir($path_root_project,true);
-    tdFile::mkdir($path_current_arquivos,true);
-    tdFile::mkdir($path_current_build,true);
-    tdFile::mkdir($path_current_classe,true);
-    tdFile::mkdir($path_current_config,true);
-    tdFile::mkdir($path_current_controller,true);
-    tdFile::mkdir($path_current_files,true);
-    tdFile::mkdir($path_current_imagens,true);
-    tdFile::mkdir($path_current_tema,true);
-    tdFile::mkdir($path_current_view,true);
-    tdFile::mkdir($path_current_website,true);
-    tdFile::mkdir($path_current_log,true);
+    tdFile::mkdir(PATH_PROJECT);
+    tdFile::mkdir($path_current_arquivos);
+    tdFile::mkdir($path_current_build);
+    tdFile::mkdir($path_current_classe);
+    tdFile::mkdir($path_current_config);
+    tdFile::mkdir($path_current_controller);
+    tdFile::mkdir($path_current_files);
+    tdFile::mkdir($path_current_imagens);
+    tdFile::mkdir($path_current_tema);
+    tdFile::mkdir($path_current_view);
+    tdFile::mkdir($path_current_website);
+    tdFile::mkdir($path_current_log);
 
-    tdFile::mkdir($path_current_arquivos_temp,true);
-    tdFile::mkdir($path_current_build_js,true);
-    tdFile::mkdir($path_current_build_css,true);
-    tdFile::mkdir($path_current_files_cadastro,true);
-    tdFile::mkdir($path_current_files_consulta,true);
-    tdFile::mkdir($path_current_files_movimentacao,true);
-    tdFile::mkdir($path_current_files_relatorio,true);
-    tdFile::mkdir($path_current_tema_desktop,true);
-    tdFile::mkdir($path_current_tema_padrao,true);
+    tdFile::mkdir($path_current_arquivos_temp);
+    tdFile::mkdir($path_current_build_js);
+    tdFile::mkdir($path_current_build_css);
+    tdFile::mkdir($path_current_files_cadastro);
+    tdFile::mkdir($path_current_files_consulta);
+    tdFile::mkdir($path_current_files_movimentacao);
+    tdFile::mkdir($path_current_files_relatorio);
+    tdFile::mkdir($path_current_tema_desktop);
+    tdFile::mkdir($path_current_tema_padrao);
 
-
-    // Move a pasta tema do core   
-    $path   =  'core/tema/padrao/';
+    // Move a pasta tema   
+    $path   = PATH_MILES_LIBRARY . 'tema/padrao/';
     $files  = scandir($path);
 
     foreach ($files as $file) {
         if ($file != '.' && $file != '..'){
-            copy($path . $file , $path_current_tema_padrao . $file);
+            tdFile::move($path . $file , $path_current_tema_padrao . $file);
         }
     }
-    
-    $path   =  'core/tema/desktop/';
-    $files = scandir($path);
+
+    $path   = PATH_MILES_LIBRARY .  'tema/desktop/';
+    $files  = scandir($path);
     foreach ($files as $file){
         if ($file != '.' && $file != '..'){
-            copy($path . $file , $path_current_tema_desktop . $file);
+            tdFile::move($path . $file , $path_current_tema_desktop . $file);
         }
     }

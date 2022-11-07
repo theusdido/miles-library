@@ -141,9 +141,9 @@
 	$colBlocoIntalacao->add($iconInstallHome);
 	
 	$aInstallHome 			= tdClass::Criar("hyperlink");
-	$aInstallHome->href 	= URL_MILES . "index.php?controller=install/modulos";
+	$aInstallHome->href 	= URL_MILES . "index.php?controller=install";
 	$aInstallHome->target 	= "_blank";
-	$aInstallHome->add("Pacotes");
+	$aInstallHome->add("Instalação");
 	$aInstallHome->id 		= "link-install-home";
 	$colBlocoIntalacao->add($aInstallHome);
 	

@@ -1,4 +1,6 @@
 <?php
+    
+    
     $mysql_ini_desenv = array(
         'usuario='.$_SESSION["db_user"],
         'senha='.$_SESSION["db_password"],

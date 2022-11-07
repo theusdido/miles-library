@@ -37,7 +37,7 @@
 					$sql 				= "SELECT id,{$atributo->nome} FROM " .  $entidadeNameMov . " WHERE ID = " . $identidadepai;
 					$query 				= $conn->query($sql);
 					$linha 				= $query->fetch();
-					$valorold 			= utf8charset(getHTMLTipoFormato($atributo->tipohtml,$linha[$atributo->nome]));
+					$valorold 			= tdc::utf8(getHTMLTipoFormato($atributo->tipohtml,$linha[$atributo->nome]));
 					$valor 				= Config::Integridade($entidade->contexto->id,$atributo->nome,$obj->valor,"");
 
 					if ($valor == $valorold) continue;
@@ -49,7 +49,7 @@
 						$empresa 	= Session::get()->empresa;
 						$usuario 	= Session::get()->userid;
 						$datahora 	= date("Y-m-d H:i:s");
-						$observacao = utf8charset($_GET["observacao"]);
+						$observacao = tdc::utf8($_GET["observacao"]);
 						$motivo 	= isset($_GET["motivo"])?$_GET["motivo"]:0;
 						$sql = "
 							INSERT INTO ".getSystemPrefixo()."movimentacaohistoricoalteracao (id,observacao,atributo,empresa,entidade,entidademotivo,motivo,movimentacao,usuario,valor,valorold,projeto,datahora) VALUES 							
@@ -84,7 +84,7 @@
 						$empresa 	= Session::get()->empresa;
 						$usuario 	= Session::get()->userid;
 						$datahora 	= date("Y-m-d H:i:s");
-						$observacao = utf8charset($_GET["observacao"]);
+						$observacao = tdc::utf8($_GET["observacao"]);
 						$sqlMHA = "
 							INSERT INTO ".getSystemPrefixo()."movimentacaohistoricoalteracao (id,observacao,atributo,empresa,entidade,entidademotivo,motivo,movimentacao,usuario,valor,valorold,projeto,datahora) VALUES 
 							({$prox},'{$observacao}',{$atributo->id},{$empresa},{$entidade->id},{$_GET["entidademotivo"]},{$motivo},{$_GET["movimentacao"]},{$usuario},'{$valor}','{$valorold}',1,'{$datahora}');
@@ -122,7 +122,7 @@
 					$query = $conn->query($sql);
 					$linha = $query->fetch();
 
-					echo ($a==1?"":",").'{"atributo":"'.$attr.'","valor":"'.utf8charset(getHTMLTipoFormato($atributo->tipohtml,$linha[$atributo->nome])).'"}';
+					echo ($a==1?"":",").'{"atributo":"'.$attr.'","valor":"'.tdc::utf8(getHTMLTipoFormato($atributo->tipohtml,$linha[$atributo->nome])).'"}';
 					$a++;
 				}
 				echo "]";
@@ -190,7 +190,7 @@
 	if ($movimentacao->exibirtitulo == 1){
 		$titulo 			= tdClass::Criar("p");
 		$titulo->class 		= "titulo-pagina";
-		$titulo->add(utf8charset($movimentacao->descricao));
+		$titulo->add(tdc::utf8($movimentacao->descricao));
 		$blocoTitulo->add($titulo);
 		$linhaTitulo 		= tdClass::Criar("div");
 		$linhaTitulo->class = "row";
@@ -540,7 +540,7 @@
 		$queryQtdeStatus 	= $conn->query($sqlQtdeStatus);
 		$QtdeStatus 		= $queryQtdeStatus->rowCount();
 	}	
-	$campo_observacao 	= utf8charset('<label for=\'observacao\' class=\'control-label\'>Observação</label>');
+	$campo_observacao 	= tdc::utf8('<label for=\'observacao\' class=\'control-label\'>Observação</label>');
 	$campo_observacao 	.= '<textarea class=\'form-control input-sm\' required=\'true\' id=\'observacao\' name=\'observacao\' data-entidade=\''.$motivoNomeEntidade.'\'></textarea>';
 	
 	$js = tdClass::Criar("script");
@@ -598,6 +598,6 @@
 				}
 			});
 		}
-		$("#modal-movimentacao .modal-header .modal-title").html("'.utf8charset($movimentacao->descricao).'");
+		$("#modal-movimentacao .modal-header .modal-title").html("'.tdc::utf8($movimentacao->descricao).'");
 	');
 	$js->mostrar();

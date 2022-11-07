@@ -62,7 +62,7 @@
 		$sql = "SELECT id,nome,descricao,pacote FROM ".PREFIXO."entidade ORDER BY id DESC;";
 		$query = $conn->query($sql);
 		While($linha = $query->fetch()){
-			$descricao = executefunction("utf8charset",array($linha["descricao"]));
+			$descricao = executefunction("tdc::utf8",array($linha["descricao"]));
 			echo "<option value='".$linha["id"]."' data-nome='".$linha["nome"]."' data-pacote='".$linha["pacote"]."' data-descricao='".$descricao."'>".$descricao." [ ".$linha["nome"]." ]</option>";
 		}
 		exit;
@@ -72,7 +72,7 @@
 		$sql = "SELECT b.id,a.nome,b.descricao,a.pacote FROM ".PREFIXO."entidade a,".PREFIXO."consulta b WHERE a.id = b.entidade ORDER BY a.id DESC;";
 		$query = $conn->query($sql);
 		While($linha = $query->fetch()){
-			$descricao = executefunction("utf8charset",array($linha["descricao"]));
+			$descricao = executefunction("tdc::utf8",array($linha["descricao"]));
 			echo "<option value='".$linha["id"]."' data-nome='".$linha["nome"]."' data-pacote='".$linha["pacote"]."' data-descricao='".$descricao."'>".$descricao." [ ".$linha["nome"]." ]</option>";
 		}
 		exit;
@@ -82,7 +82,7 @@
 		$sql = "SELECT b.id,a.nome,b.descricao,a.pacote FROM ".PREFIXO."entidade a,".PREFIXO."relatorio b WHERE a.id = b.entidade ORDER BY a.id DESC;";
 		$query = $conn->query($sql);
 		While($linha = $query->fetch()){
-			$descricao = executefunction("utf8charset",array($linha["descricao"]));
+			$descricao = executefunction("tdc::utf8",array($linha["descricao"]));
 			echo "<option value='".$linha["id"]."' data-nome='".$linha["nome"]."' data-pacote='".$linha["pacote"]."' data-descricao='".$descricao."'>".$descricao." [ ".$linha["nome"]." ]</option>";
 		}
 		exit;
@@ -92,7 +92,7 @@
 		$sql = "SELECT b.id,a.nome,b.descricao,a.pacote FROM ".PREFIXO."entidade a,".PREFIXO."movimentacao b WHERE a.id = b.entidade ORDER BY a.id DESC;";
 		$query = $conn->query($sql);
 		While($linha = $query->fetch()){
-			$descricao = executefunction("utf8charset",array($linha["descricao"]));
+			$descricao = executefunction("tdc::utf8",array($linha["descricao"]));
 			echo "<option value='".$linha["id"]."' data-nome='".$linha["nome"]."' data-pacote='".$linha["pacote"]."' data-descricao='".$descricao."'>".$descricao." [ ".$linha["nome"]." ]</option>";
 		}
 		exit;
@@ -102,7 +102,7 @@
 		$id					= $_POST["id"];
 		$entidadeRequest	= isset($_POST["entidade"])?$_POST["entidade"]:"";
 		$entidade			= $entidadeRequest==""?"0":"'" .$entidadeRequest. "'";
-		$descricao			= $_POST["descricao"]==""?"null":"'" .executefunction("utf8charset",array($_POST["descricao"])). "'";
+		$descricao			= $_POST["descricao"]==""?"null":"'" .executefunction("tdc::utf8",array($_POST["descricao"])). "'";
 		$link 				= $_POST["link"]==""?"'#'":"'" .$_POST["link"]. "'";
 		$target				= $_POST["target"]==""?"null":"'" .$_POST["target"]. "'";		
 		$pai				= isset($_POST["pai"])?$_POST["pai"]:0;
@@ -196,7 +196,7 @@
 		$query = $conn->query($sql);
 		While ($linha = $query->fetch()){
 			$entidade 	= ($linha["entidade"]==""?0:$linha["entidade"]);
-			$descricao 	= executefunction("utf8charset",array($linha["descricao"]));
+			$descricao 	= executefunction("tdc::utf8",array($linha["descricao"]));
 			$link 		= $linha["link"];
 			$target 	= $linha["target"];
 			$ordem	 	= $linha["ordem"];
@@ -496,7 +496,7 @@
 										$sql = "SELECT id,descricao FROM ".PREFIXO."menu WHERE pai = 0 or pai is null ORDER BY ordem ASC";
 										$query = $conn->query($sql);
 										While($linha = $query->fetch()){
-											$descricao = executefunction("utf8charset",array($linha["descricao"]));
+											$descricao = executefunction("tdc::utf8",array($linha["descricao"]));
 											echo "<option value='".$linha["id"]."'>".$descricao."</option>";
 										}
 									?>
@@ -541,8 +541,8 @@
 							";
 							$query = $conn->query($sql);
 							While ($linha = $query->fetch()){
-								$descricao = executefunction("utf8charset",array($linha["descricao"]));
-								echo imprimeLinhaMenu($indice,$linha["id"],$descricao,executefunction("utf8charset",array($linha["pai"])),$self,$linha["pai"]);
+								$descricao = executefunction("tdc::utf8",array($linha["descricao"]));
+								echo imprimeLinhaMenu($indice,$linha["id"],$descricao,executefunction("tdc::utf8",array($linha["pai"])),$self,$linha["pai"]);
 								$indice++;
 							}
 						?>

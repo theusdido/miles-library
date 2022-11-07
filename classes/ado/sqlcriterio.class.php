@@ -32,10 +32,13 @@ class SqlCriterio extends SqlExpressao {
 			unset($operador);
 		}
 		
-		// Vai dar um erro a primeira vez pois o mesmo n�o tem operador
-		@$this->operador[] = $operador;
-		
-		// Agrega o resultado da express�o a lista de express�es
+		try{
+			// Vai dar um erro a primeira vez pois o mesmo não tem operador
+			@$this->operador[] = $operador;
+		}catch(Throwable $t){
+
+		}
+		// Agrega o resultado da expressão a lista de expressões
 		$this->expressao[] = $expressao;
 		
 	}

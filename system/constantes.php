@@ -14,9 +14,6 @@
 	# FOLDER
 	#*************************************** 
 
-	// FOLDER CORE
-	define("FOLDER_CORE","core");
-
 	// FOLDER PROJECT
 	define("FOLDER_PROJECT","project");
 
@@ -40,7 +37,13 @@
 
 	// FOLDER COMPONENT
 	define('FOLDER_COMPONENT', 'component');
-	
+
+	// FOLDER CONTROLLER
+	define('FOLDER_CONTROLLER', 'controller');
+
+	// FOLDER INSTALL
+	define('FOLDER_INSTALL', 'install');
+
 	#***************************************
 	# SQL
 	#***************************************

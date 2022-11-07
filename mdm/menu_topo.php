@@ -7,7 +7,7 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="index.php">
-        <img alt="Brand" src="../tema/padrao/logo-favicon.png">
+        <img alt="Brand" src="<?=URL_CURRENT_THEME?>favicon.png">
 		<label>Teia Online</label>
       </a>
     </div>
@@ -51,7 +51,7 @@
   </div>
 	<div class="alert alert-info text-right dados-config-projeto">
 		<?php
-			echo '<b id="titulo-mdm">MILES DATABASE MANAGEMENT</b> ID: [ <b>'.$currentproject.'</b> ] - Projeto: <b>'.$currentprojectname.'</b> | Instância: <b>'.$currenttypedatabase.'</b>';
+			echo '<b id="titulo-mdm">MILES DATABASE MANAGEMENT</b> ID: [ <b>'.CURRENT_PROJECT_ID.'</b> ] - Projeto: <b>'.$currentprojectname.'</b> | Instância: <b>'.$currenttypedatabase.'</b>';
 		?>
 	</div>  
 </nav>

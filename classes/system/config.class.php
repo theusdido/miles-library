@@ -79,7 +79,7 @@ class Config {
 		if (sizeof($dataset) <= 0) return $valor;
 		switch((int)$dataset[0]->tipohtml){
 			case 1: case 2: case 3:
-				$retorno = utf8charset($valor);
+				$retorno = tdc::utf8($valor);
 			break;
 			case 5:
 				if (gettype($valor) == 'array'){
@@ -213,5 +213,31 @@ class Config {
 		$_system	= isset($mjc->{$path_variable}) ? $mjc->{$path_variable} : false;
 
 		return $_custom ? $_custom : ($_system ? $_system : $default);
+	}
+
+	/*
+		* createFileDbIni
+		* Data de Criacao: 16/09/2022
+		* @author Edilson Valentim dos Santos Bitencourt (Theusdido)
+		* Retorna o valor da variável de ambiente
+		* PARAMETROS
+		*	@params: String variavel:string | any
+		* RETORNO
+		*	@return: any
+	*/
+	public static function createFileDbIni($path,$data = [], $env_db = 'temp',$sgdb = 'mysql'){
+		$ini_data = array(
+			'usuario='	.$data["db_user"],
+			'senha='	.$data["db_password"],
+			'base='		.$data["db_base"],
+			'host='		.$data["db_host"],
+			'tipo='		.$data["db_type"],
+			'porta='	.$data["db_port"]
+		);
+		$fpMySQLINIDesenv    = fopen($path . $env_db . '_' . $sgdb .'.ini',"w");
+		foreach($ini_data as $c){
+			fwrite($fpMySQLINIDesenv,trim($c)."\n");
+		}
+		fclose($fpMySQLINIDesenv);
 	}
 }

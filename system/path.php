@@ -3,27 +3,33 @@
 	# PATH
 	#***************************************
 
-	// Diretório do core
-	define("PATH_CORE", PATH_MILES . FOLDER_CORE . '/');
-
 	// Diretório dos arquivos de sistema
-	define('PATH_SYSTEM', PATH_CORE . FOLDER_SYSTEM . '/');
+	define('PATH_SYSTEM', PATH_MILES_LIBRARY . FOLDER_SYSTEM . '/');
 
 	// * 
 	// * Caminhos estáticos do sistema
 	// *
 
 	// Diretório dos arquivos de configuração
-	define('PATH_CONFIG', PATH_CORE . FOLDER_CONFIG . '/');
+	define('PATH_CONFIG', PATH_MILES_LIBRARY . FOLDER_CONFIG . '/');
 
+	// Caminho padrão para a classes de models do MVC ( MODEL )
+	define('PATH_MVC_MODEL',PATH_MILES_LIBRARY.'model/');
+
+	// Caminho padrão para a classes de views do MVC ( VIEW )
+	define('PATH_MVC_VIEW',PATH_MILES_LIBRARY.'view/');
+
+	// Caminho padrão para a classes de controllers do MVC ( CONTROLLER )
+	define('PATH_MVC_CONTROLLER', PATH_MILES_LIBRARY . 'controller/');
+	
 	// Caminho padrão para as classes
-	define('PATH_CLASS',PATH_CORE . 'classes/');
+	define('PATH_CLASS',PATH_MILES_LIBRARY . 'classes/');
 
 	// Caminho padrão para as blibiotecas
-	define('PATH_LIB',PATH_MILES . 'lib/');
+	define('PATH_LIB',PATH_MILES_LIBRARY . 'lib/');
 
 	// Caminho padrão para as imagens
-	define('PATH_IMG',PATH_CORE . 'images/');
+	define('PATH_IMG',PATH_MILES_LIBRARY . 'images/');
 
 	// Caminho padrão para a blibioteca ADO ( ADVANCED DATA OBJECT )
 	define('PATH_ADO',PATH_CLASS.'ado/');
@@ -43,23 +49,14 @@
 	// Caminho padrão para a biblioteca WIDGETS ( ELEMENTOS VISUAIS )
 	define('PATH_WIDGETS',PATH_CLASS.'widgets/');
 
-	// Caminho padrão para a classes de models do MVC ( MODELOS )
-	define('PATH_MVC_MODEL',PATH_SYSTEM.'model/');
-
-	// Caminho padrão para a classes de views do MVC ( VIS?O )
-	define('PATH_MVC_VIEW',PATH_CORE.'view/');
-
-	// Caminho padrão para a classes de controllers do MVC ( CONTROLADOR )
-	define('PATH_MVC_CONTROLLER', PATH_CORE . 'controller/');
-
 	// Caminho padrão para os componentes do BOOTSTRAP
 	define('PATH_BOOTSTRAP',PATH_CLASS.'widgets/bootstrap/');
 
 	// Caminho padrão para os arquivos de log	
-	define('PATH_LOG',PATH_CORE . "log/");		
+	define('PATH_LOG',PATH_MILES . "log/");		
 
 	// Caminho padrão para os arquivos de debug
-	define('PATH_DEBUG',PATH_CORE . "debug/");
+	define('PATH_DEBUG',PATH_MILES . "debug/");
 	
 	// Caminho padrão para os arquivos de cada projeto
 	define('PATH_PROJECT',PATH_MILES . FOLDER_PROJECT . '/');
@@ -77,13 +74,13 @@
 	define('PATH_CLASS_SYSTEM',PATH_CLASS.'system/');
 
 	// Caminho da Páginas
-	define("PATH_SYSTEM_PAGE",PATH_CORE . "page/");
+	define("PATH_SYSTEM_PAGE",PATH_MILES_LIBRARY . "page/");
 
 	// Caminho dos Componentes
-	define("PATH_SYSTEM_COMPONENT",PATH_CORE . "component/");
+	define("PATH_SYSTEM_COMPONENT",PATH_MILES_LIBRARY . "component/");
 
 	// Caminho de padrão para os arquivos de instalação
-	define('PATH_INSTALL', PATH_CORE . 'install/');
+	define('PATH_INSTALL', PATH_MILES_LIBRARY . 'install/');
 
 	// Caminho dos arquivos de instalação de pacotes ( módulos )
 	define('PATH_PACKAGE', PATH_INSTALL . 'package/');
@@ -97,7 +94,7 @@
 
 	// Caminho para o tema
 	define("PATH_THEME",'tema/' . CURRENT_THEME . '/');
-	define('PATH_THEME_SYSTEM', PATH_CORE.PATH_THEME);
+	define('PATH_THEME_SYSTEM', PATH_MILES.PATH_THEME);
 
 	// Caminho do projeto atual
 	define('PATH_CURRENT_PROJECT' , PATH_PROJECT);
@@ -162,7 +159,7 @@
 	// Caminho padrão para os arquivos do build do projeto
 	define("PATH_CURRENT_BUILD", PATH_CURRENT_PROJECT . FOLDER_BUILD . "/");
 
-	define ('PATH_MDM', PATH_CORE . 'mdm/');
+	define ('PATH_MDM', PATH_MILES_LIBRARY . 'mdm/');
 
 	define("PATH_MDM_JS_COMPILE", PATH_CURRENT_PROJECT  . FOLDER_BUILD . "/js/");
 

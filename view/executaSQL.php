@@ -6,14 +6,14 @@
 	$form_bloco->class="col-md-12";	
 	
 	$form = tdClass::Criar("tdformulario");
-	$form->legenda->add(utf8charset("Instrução SQL"));
+	$form->legenda->add(tdc::utf8("Instrução SQL"));
 	
 	// Botão Executar	
 	$btn_executar = tdClass::Criar("button");	
 	$btn_executar->class = "btn btn-primary b-executar";
 	$span_executar = tdClass::Criar("span");
 	$span_executar->class = "fas fa-bolt";
-	$btn_executar->add($span_executar,'Executar");	
+	$btn_executar->add($span_executar,"Executar");	
 	$btn_executar->id = "b-executar";
 	
 	// Grupo de botões
@@ -26,9 +26,9 @@
 	
 	// Adicionando os campos da Busca Básica
 	$campoBuscaBasica = array(
-		Campos::TextArea("query",'query",'",'")
+		//Campos::TextArea("query",'query",'",'")
 	);
-	
+
 	foreach ($campoBuscaBasica as $campo){
 		$coluna = tdClass::Criar("div");
 		$coluna->class="col-md-12 col-sm-12";

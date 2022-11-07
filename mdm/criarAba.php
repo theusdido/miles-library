@@ -21,7 +21,7 @@
 		$linha_ultimo = $query_ultimo->fetch();
 		$idRetorno = $linha_ultimo["id"];
 				
-		$descricao = executefunction("utf8charset",array($_POST["descricao"]));
+		$descricao = executefunction("tdc::utf8",array($_POST["descricao"]));
 		$atributos = implode(",",$_POST["atributos"]);
 		if ($_POST["id"] == ""){
 			$sql = "INSERT INTO ".PREFIXO."abas (id,entidade,descricao,atributos) values ({$idRetorno},{$entidade},'{$descricao}','{$atributos}');";
@@ -45,7 +45,7 @@
 		$sql = "SELECT descricao FROM ".PREFIXO."abas WHERE id = {$id}";
 		$query = $conn->query($sql);
 		$linha = $query->fetch();
-		$descricao = executefunction("utf8charset",array($linha[0]));
+		$descricao = executefunction("tdc::utf8",array($linha[0]));
 	}else{
 		$id = "";
 		$descricao = "";
@@ -101,8 +101,8 @@
 												}
 											}
 										}
-										$descricao = executefunction("utf8charset",array($linha['descricao']));
-										$nome = executefunction("utf8charset",array($linha['nome']));
+										$descricao = executefunction("tdc::utf8",array($linha['descricao']));
+										$nome = executefunction("tdc::utf8",array($linha['nome']));
 										echo "<option value='{$linha['id']}' {$selected}>{$descricao} [ {$nome} ]</option>";
 									}
 								?>
@@ -115,7 +115,7 @@
 						$sql = "SELECT id,descricao,atributos FROM ".PREFIXO."abas WHERE entidade = {$entidade}";
 						$query = $conn->query($sql);
 						foreach($query->fetchAll() as $linha){
-							$descricao = executefunction("utf8charset",array($linha['descricao']));
+							$descricao = executefunction("tdc::utf8",array($linha['descricao']));
 							echo "<a class='list-group-item btn-link-excluir-aba'>
 									<label style='cursor:pointer' onclick='editarAba({$entidade},{$linha['id']},\"{$linha['atributos']}\");'>{$descricao}</label>
 									<button type='button' class='btn btn-default' onclick='excluirAba({$linha['id']},{$entidade});' style='float:right;margin-top:-4px'>

@@ -799,7 +799,19 @@ header #menu {
 #miles-root > div > footer {
 	position: fixed;
     bottom: 0;
-	z-index:1000px;
+		z-index:1000px;
+    background-color: #253544 !important;
+    color: #FFF !important;
+    text-align: center;
+    font-size: 12px;
+		height: 15px;
+
+		    margin-bottom: 0px !important;
+		    padding: 15px !important;
+
+}
+#miles-root > div > footer a {
+	color:#66deff;
 }
 
 .tdform .checkbox-n.active,

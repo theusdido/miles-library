@@ -23,7 +23,7 @@
 	if (!empty($_POST)){
 		if ($_POST["op"] == "salvar"){
 			$id			 			= isset($_POST["id"])?$_POST["id"]:'';
-			$descricao				= executefunction("utf8charset",array($_POST["descricao"]));
+			$descricao				= executefunction("tdc::utf8",array($_POST["descricao"]));
 			$entidade	 			= $_POST["entidade"];
 			$movimentacao	 		= isset($_POST["movimentacao"])?$_POST["movimentacao"]:0;			
 			$exibirbotaoeditar		= isset($_POST["exibirbotaoeditar"])?1:0;
@@ -177,11 +177,11 @@
 			foreach($query->fetchAll() as $linha){
 				$atributo = $linha["atributo"];
 				$operador = $linha["operador"];
-				$legenda = executefunction("utf8charset",array($linha["legenda"]));
+				$legenda = executefunction("tdc::utf8",array($linha["legenda"]));
 				$sqlAtributo = "SELECT descricao FROM td_atributo WHERE id = " . $atributo;
 				$queryAtributo = $conn->query($sqlAtributo);
 				$linhaAtributo = $queryAtributo->fetch();
-				$atributoDescricao = executefunction("utf8charset",array($linhaAtributo["descricao"]));
+				$atributoDescricao = executefunction("tdc::utf8",array($linhaAtributo["descricao"]));
 				echo "<span class='list-group-item'>
 						Atributo <strong>{$atributoDescricao}</strong> com  operador ( <strong>{$operador} ) </strong>
 						<button type='button' class='btn btn-default' onclick='excluirFiltro({$linha["id"]});' style='float:right;margin-top:-4px'>
@@ -204,11 +204,11 @@
 			foreach($query->fetchAll() as $linha){
 				$atributo = $linha["atributo"];
 				$operador = $linha["operador"];
-				$legenda = executefunction("utf8charset",array($linha["legenda"]));
+				$legenda = executefunction("tdc::utf8",array($linha["legenda"]));
 				$sqlAtributo = "SELECT descricao FROM td_atributo WHERE id = " . $atributo;
 				$queryAtributo = $conn->query($sqlAtributo);
 				$linhaAtributo = $queryAtributo->fetch();
-				$atributoDescricao = executefunction("utf8charset",array($linhaAtributo["descricao"]));
+				$atributoDescricao = executefunction("tdc::utf8",array($linhaAtributo["descricao"]));
 				$valor = $linha["valor"];
 				echo "<span class='list-group-item'>
 						Atributo <strong>{$atributoDescricao}</strong> com  operador ( <strong>{$operador} ) </strong>
@@ -235,7 +235,7 @@
 				$sqlAtributo = "SELECT descricao FROM td_atributo WHERE id = " . $atributo;
 				$queryAtributo = $conn->query($sqlAtributo);
 				$linhaAtributo = $queryAtributo->fetch();
-				$atributoDescricao = executefunction("utf8charset",array($linhaAtributo["descricao"]));
+				$atributoDescricao = executefunction("tdc::utf8",array($linhaAtributo["descricao"]));
 				echo "<span class='list-group-item'>
 						Atributo <strong>{$atributoDescricao}</strong> com  operador ( <strong>{$operador} ) </strong>. Valor: <small class='text-info'>{$valor}</small>.
 						<button type='button' class='btn btn-default' onclick='excluirStatus({$linha["id"]});' style='float:right;margin-top:-4px'>
@@ -254,7 +254,7 @@
 		$query = $conn->query($sql);
 		foreach ($query->fetchAll() as $linha){
 			$entidade			= $linha["entidade"];
-			$descricao			= executefunction("utf8charset",array($linha["descricao"]));
+			$descricao			= executefunction("tdc::utf8",array($linha["descricao"]));
 			$movimentacao		= $linha["movimentacao"];
 			$exibirbotaoeditar 	= $linha["exibirbotaoeditar"];
 			$exibirbotaoexcluir = $linha["exibirbotaoexcluir"];
@@ -529,7 +529,7 @@
 										$sql = "SELECT id,nome,descricao FROM ".PREFIXO."entidade";
 										$query = $conn->query($sql);
 										foreach($query->fetchAll() as $linha){
-											echo '<option value="'.$linha["id"].'" data-nome="'.$linha["nome"].'">'.executefunction("utf8charset",array($linha["descricao"])).' [ '.$linha["nome"].' ]</option>';
+											echo '<option value="'.$linha["id"].'" data-nome="'.$linha["nome"].'">'.executefunction("tdc::utf8",array($linha["descricao"])).' [ '.$linha["nome"].' ]</option>';
 										}
 									?>
 								</select>
@@ -610,7 +610,7 @@
 															$sql = "SELECT id,nome,descricao FROM ".PREFIXO."atributo WHERE entidade = " . $entidade;
 															$query = $conn->query($sql);
 															foreach($query->fetchAll() as $linha){
-																echo '<option value="'.$linha["id"].'" data-nome="'.$linha["nome"].'">'.executefunction("utf8charset",array($linha["descricao"])).' [ '.$linha["nome"].' ]</option>';
+																echo '<option value="'.$linha["id"].'" data-nome="'.$linha["nome"].'">'.executefunction("tdc::utf8",array($linha["descricao"])).' [ '.$linha["nome"].' ]</option>';
 															}
 														?>
 														</select>
@@ -692,7 +692,7 @@
 															$sql = "SELECT id,nome,descricao,chaveestrangeira FROM ".PREFIXO."atributo WHERE entidade = " . $entidade ;
 															$query = $conn->query($sql);
 															foreach($query->fetchAll() as $linha){
-																echo '<option value="'.$linha["id"].'" data-nome="'.$linha["nome"].'" data-chaveestrangeira="'.$linha["chaveestrangeira"].'">'.executefunction("utf8charset",array($linha["descricao"])).' [ '.$linha["nome"].' ]</option>';
+																echo '<option value="'.$linha["id"].'" data-nome="'.$linha["nome"].'" data-chaveestrangeira="'.$linha["chaveestrangeira"].'">'.executefunction("tdc::utf8",array($linha["descricao"])).' [ '.$linha["nome"].' ]</option>';
 															}
 														?>
 														</select>
@@ -723,7 +723,7 @@
 															$sql = "SELECT id,descricao FROM ".PREFIXO."status";
 															$query = $conn->query($sql);
 															foreach($query->fetchAll() as $linha){
-																echo '<option value="'.$linha["id"].'">'.executefunction("utf8charset",array($linha["descricao"])).'</option>';
+																echo '<option value="'.$linha["id"].'">'.executefunction("tdc::utf8",array($linha["descricao"])).'</option>';
 															}
 														?>
 														</select>
@@ -787,7 +787,7 @@
 															$sql = "SELECT id,nome,descricao FROM ".PREFIXO."atributo WHERE entidade = " . $entidade;
 															$query = $conn->query($sql);
 															foreach($query->fetchAll() as $linha){
-																echo '<option value="'.$linha["id"].'" data-nome="'.$linha["nome"].'">'.executefunction("utf8charset",array($linha["descricao"])).' [ '.$linha["nome"].' ]</option>';
+																echo '<option value="'.$linha["id"].'" data-nome="'.$linha["nome"].'">'.executefunction("tdc::utf8",array($linha["descricao"])).' [ '.$linha["nome"].' ]</option>';
 															}
 														?>
 														</select>

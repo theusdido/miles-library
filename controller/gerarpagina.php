@@ -49,7 +49,7 @@ if ($entidade->contexto->exibirlegenda == 1){
 	$titulo->class 			= $isprincipal ? "" : "td-titulopagina-relacionamento";
 	
 	$titulo->add(
-		utf8charset($entidade->contexto->descricao,7) ,
+		tdc::utf8($entidade->contexto->descricao,7) ,
 		tdc::html("small","[ {$entidade->contexto->nome} ]",null,"nome-entidade"),
 		tdc::o("badge",array($entidade->contexto->id))
 	);

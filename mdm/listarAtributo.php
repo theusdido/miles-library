@@ -98,7 +98,7 @@
 							$sql = "SELECT id,nome,descricao,ordem FROM ".PREFIXO."atributo WHERE entidade = {$entidade} ORDER BY ordem ASC";
 							$query = $conn->query($sql);
 							foreach ($query->fetchAll() as $linha){
-								$descricao = executefunction("utf8charset",array($linha["descricao"]));
+								$descricao = executefunction("tdc::utf8",array($linha["descricao"]));
 								echo "	<tr>
 											<td>{$linha["id"]}</td>
 											<td>{$descricao}</td>
@@ -142,7 +142,7 @@
 						$queryT = $conn->query($sqlT);
 						$linhaT = $queryT->fetchAll();
 						foreach($linhaT as $dado){
-							echo '<option value="'.$dado["id"].'">'. executefunction("utf8charset",array($dado["descricao"])) .' [ '.$dado["nome"].' ]</option>';
+							echo '<option value="'.$dado["id"].'">'. executefunction("tdc::utf8",array($dado["descricao"])) .' [ '.$dado["nome"].' ]</option>';
 						}
 					?>
 					</select>

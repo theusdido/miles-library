@@ -25,7 +25,7 @@
             ($de['td_projeto']==''?'NULL':$de['td_projeto']),
             ($de['td_empresa']==''?'NULL':$de['td_empresa']),
             ($de['inativo']==''?'NULL':$de['inativo']),
-            '"'. utf8charset($de['nome'],$charset) . '"',
+            '"'. tdc::utf8($de['nome'],$charset) . '"',
             ($de['td_cidade']==''?0:$de['td_cidade'])
         );
         $insert = 'INSERT INTO td_ecommerce_bairro ('.implode(',',$campos).') VALUES ('.implode(',',$valores).');' ."\n";

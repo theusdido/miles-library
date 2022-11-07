@@ -63,12 +63,11 @@
 <script type="text/javascript">
 	$("#gerar").click(function(){
 		$.ajax({
-			url:"../../index.php",
+			url:"<?=URL_API?>",
 			data:{
 				controller:"gerarcadastro",
 				entidade:<?=$entidade?>,
 				principal:true,
-				currentproject:"<?=$_SESSION["currentproject"]?>",
 				id:<?=$id?>
 			},
 			complete:function(retorno){
@@ -82,7 +81,7 @@
 	
 	function gerarPagina(html){
 		$.ajax({
-			url:"../../index.php",
+			url:"<?=URL_API?>",
 			type:"POST",
 			data:{
 				controller:"mdm/componente",
@@ -111,10 +110,10 @@
 			else echo $parms;
 		}elseif($cur_encoding == "ISO 8859-1" && mb_check_encoding($parms,'ISO 8859-1')){
 			if ($retorno) return $parms;
-			else echo utf8charset($parms);
+			else echo tdc::utf8($parms);
 		}else{
 			if ($retorno) return $parms;
-			else echo utf8charset($parms);
+			else echo tdc::utf8($parms);
 		}
 	}
 	

@@ -88,25 +88,34 @@
 						text:"Aguarde"
 					});
 				},
-				complete:function(ret){	
-					var retorno = JSON.parse(ret.responseText);
-					if (retorno.error_code == 0){
-						$.ajax({
-							url:session.urlmiles,
-							data:{
-								controller:"template"
-							},
-							complete:function(ret){
-								$("#miles-root").html(ret.responseText);
-								$("#logon").remove();
-								$.loadingBlockHide();
-							}
-						});
-					}else{						
-						$("#retorno").html("[ " + retorno.error_code + " ] - " + retorno.error_msg);
+				complete:function(ret){
+					try{
+						var retorno = JSON.parse(ret.responseText);
+						if (retorno.error_code == 0){
+							$.ajax({
+								url:session.urlmiles,
+								data:{
+									controller:"template"
+								},
+								complete:function(ret){
+									$("#miles-root").html(ret.responseText);
+									$("#logon").remove();
+									$.loadingBlockHide();
+								}
+							});
+						}else{						
+							$("#retorno").html("[ " + retorno.error_code + " ] - " + retorno.error_msg);
+							$("#retorno").show();
+							$.loadingBlockHide();
+						}
+					}catch(e){
+						$("#retorno").html("Erro interno, por favor tenta mais tarde");
 						$("#retorno").show();
 						$.loadingBlockHide();
 					}
+				},
+				error:function(xhr,exception){
+					console.log("Ocorreu um erro !");
 				}
 			});
 		}

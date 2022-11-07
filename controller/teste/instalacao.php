@@ -18,14 +18,14 @@
 		Verifica se todos os menus estão presentes
 	*/
 
-	$sql = "SELECT 1 FROM td_menu WHERE descricao='".utf8charset('Administração')."'";
+	$sql = "SELECT 1 FROM td_menu WHERE descricao='".tdc::utf8('Administração')."'";
 	$query = $conn->query($sql);
 	if ($query->rowCount() != 1){
 		echo 'Menu Administração não passou no teste';
 		return false;
 	}
 
-	$sql = "SELECT 1 FROM td_menu WHERE descricao='".utf8charset('Usuário')."'";
+	$sql = "SELECT 1 FROM td_menu WHERE descricao='".tdc::utf8('Usuário')."'";
 	$query = $conn->query($sql);
 	if ($query->rowCount() != 1){
 		echo 'Menu Usuário não passou no teste';
@@ -53,7 +53,7 @@
 		return false;
 	}
 
-	$sql = "SELECT 1 FROM td_menu WHERE descricao='".utf8charset('Grupo de Usuário')."'";
+	$sql = "SELECT 1 FROM td_menu WHERE descricao='".tdc::utf8('Grupo de Usuário')."'";
 	$query = $conn->query($sql);
 	if ($query->rowCount() != 1){
 		echo 'Menu Grupo de Usuário não passou no teste';
@@ -88,21 +88,21 @@
 		return false;
 	}
 
-	$sql = "SELECT 1 FROM td_menu WHERE descricao='".utf8charset('Ticket')."' AND link = '#'";
+	$sql = "SELECT 1 FROM td_menu WHERE descricao='".tdc::utf8('Ticket')."' AND link = '#'";
 	$query = $conn->query($sql);
 	if ($query->rowCount() != 1){
 		echo 'Menu Ticket não passou no teste';
 		return false;
 	}
 
-	$sql = "SELECT 1 FROM td_menu WHERE descricao='".utf8charset('Ticket')."' AND link like '%ticket.htm%'";
+	$sql = "SELECT 1 FROM td_menu WHERE descricao='".tdc::utf8('Ticket')."' AND link like '%ticket.htm%'";
 	$query = $conn->query($sql);
 	if ($query->rowCount() != 1){
 		echo 'Menu Ticket não passou no teste';
 		return false;
 	}
 
-	$sql = "SELECT 1 FROM td_menu WHERE descricao='".utf8charset('Ticket Interação')."'";
+	$sql = "SELECT 1 FROM td_menu WHERE descricao='".tdc::utf8('Ticket Interação')."'";
 	$query = $conn->query($sql);
 	if ($query->rowCount() != 1){
 		echo 'Menu Ticket Interação não passou no teste';

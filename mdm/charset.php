@@ -97,7 +97,7 @@
 								$query = $conn->query($sql);
 								while ($linha = $query->fetch()){
 									$id 		= $linha["id"];
-									$local 		= executefunction('utf8charset',array($linha["local"],5));
+									$local 		= executefunction('tdc::utf8',array($linha["local"]));
 									$id_modal 	= 'myModal' . $linha["id"];
 									echo '
 											<tr>
@@ -139,7 +139,7 @@
 								$queryT = $conn->query($sqlT);
 								$linhaT = $queryT->fetchAll();
 								foreach($linhaT as $dado){
-									echo '<option value="'.$dado["id"].'">'. executefunction('utf8charset',array($dado["descricao"],5)) .' [ '.$dado["nome"].' ]</option>';
+									echo '<option value="'.$dado["id"].'">'. executefunction('tdc::utf8',array($dado["descricao"])) .' [ '.$dado["nome"].' ]</option>';
 								}
 							?>
 							</select>

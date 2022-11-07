@@ -650,7 +650,7 @@ function criarEntidade(
 	$tipoaba = 'tabs' #15
 ){
 	$nome 		= getSystemPREFIXO() . $nome;
-	$descricao 	= utf8charset($descricao);
+	$descricao 	= tdc::utf8($descricao);
 	
 	$sqlExisteEntidade = "SELECT id,nome FROM " . ENTIDADE . " WHERE nome='{$nome}'";
 	$queryExisteEntidade = $conn->query($sqlExisteEntidade);
@@ -731,7 +731,7 @@ function criarAtributo(
 	$tipo, #4
 	$tamanho = 0, #5
 	$nulo = 0, #6
-	$tipohtml, #7
+	$tipohtml = 3, #7
 	$exibirgradededados = 0, #8
 	$chaveestrangeira = 0, #9
 	$dataretroativa = 0, #10
@@ -749,7 +749,7 @@ function criarAtributo(
 			$labelumcheckbox 	= $descricao[2];
 			$descricao 			= $descricao[0]; #Não inverter essa ordem
 		}else{
-			$labelzerocheckbox = utf8charset("Não",'D');
+			$labelzerocheckbox = tdc::utf8("Não");
 			$labelumcheckbox = "Sim";
 		}
 	}else{
@@ -757,7 +757,7 @@ function criarAtributo(
 		$labelumcheckbox = "";	
 	}
 
-	$descricao 			= isutf8($descricao) ? utf8charset($descricao,'D') : utf8charset($descricao,'E');
+	$descricao 			= tdc::utf8($descricao);
 	$nuloSQL			= ((int)$nulo==0)?'NOT NULL':'NULL';
 	$chaveestrangeira 	= ($chaveestrangeira=="")?0:($chaveestrangeira);		
 	$inicializacao 		= str_replace("'","\'",$inicializacao);
@@ -971,7 +971,7 @@ function addMenu(
 	$tipomenu = "" #8
 ){
 	$pai		= $pai == '' ? 0 : $pai;
-	$descricao 	= utf8charset($descricao);
+	$descricao 	= tdc::utf8($descricao);
 	$sql 		= "SELECT id FROM " . MENU. " WHERE fixo = '".$fixo."';";
 	$query 		= $conn->query($sql);
 	if ($query->rowCount() > 0){
@@ -1040,7 +1040,7 @@ $atributos #3
 		}
 	}
 	$linha_verificar = $query_verificar->fetch();
-	$descricao = utf8charset($descricao);
+	$descricao = tdc::utf8($descricao);
 	if (gettype($atributos) == "array"){
 		$atributos = arrayToString($atributos);
 	}
@@ -1102,7 +1102,7 @@ function getAtributoId($entidadeString,$atributoString,$conn = null){
 	return $_id;
 }
 function criarRelacionamento($conn,$tipo,$entidadePai,$entidadeFilho,$descricao = "",$atributo = 0){
-	$descricao		= utf8charset($descricao);
+	$descricao		= tdc::utf8($descricao);
 	$cardinalidade 	= getCardinalidade($tipo);
 	$sqlVerifica 	= "SELECT id FROM ".RELACIONAMENTO." WHERE pai = " . $entidadePai . " AND filho = " . $entidadeFilho . " AND tipo = " . $tipo;
 	$queryVerifica 	= $conn->query($sqlVerifica);
@@ -1215,7 +1215,7 @@ function inserirRegistro($conn,$tabela,$id,$atributos,$valores,$criarnovoregistr
 
 	try{
 		$valores_i	= implode(",",$valores);
-		$valores_ 	= isutf8($valores_i) ? utf8charset($valores_i,'D') : $valores_i;
+		$valores_ 	= tdc::utf8($valores_i);
 		$sqlInserir = "INSERT " . $tabela . " (id,".implode(",",$atributos).") VALUES (".$id.",".$valores_.");";
 		$query 		= $conn->query($sqlInserir);
 		return $id;
@@ -1227,13 +1227,13 @@ function inserirRegistro($conn,$tabela,$id,$atributos,$valores,$criarnovoregistr
         return false;
 	}
 }
-function atualizarRegistro($conn,$tabela,$id = "",$atributos,$valores,$atualizarnulo=false){
+function atualizarRegistro($conn,$tabela,$id = "",$atributos = [],$valores = [],$atualizarnulo=false){
 	$campos = "";
 	$_atributos 	= gettype($atributos) == 'string' ? explode(',',$atributos) : $atributos;
 	$_valores		= gettype($valores) == 'string' ? explode(',',$valores) : $valores;
 	$totalAtributos = sizeof($_atributos) - 1;
 	for($i=0;$i<=$totalAtributos;$i++){
-		$campos .= $_atributos[$i] . " = " . (isutf8($_valores[$i]) ? utf8charset($_valores[$i],'D') : $_valores[$i]);
+		$campos .= $_atributos[$i] . " = " . tdc::utf8($_valores[$i]);
 		if ($i != $totalAtributos) $campos .= ",";
 	}
 	try{
@@ -1376,7 +1376,7 @@ function getMilesDataBase(){
 		$tipo		= $bdConfigMILES["tipo"];
 		$porta		= $bdConfigMILES["porta"];
 	}else{
-		echo utf8charset('Não existe arquivo de configuração com o banco de dados da MILES.');
+		echo tdc::utf8('Não existe arquivo de configuração com o banco de dados da MILES.');
 		exit;
 	}
 
@@ -1384,12 +1384,12 @@ function getMilesDataBase(){
 	$connMILES = new PDO("$tipo:host=$host;port=$porta;dbname=$base",$usuario,$senha);
 
 	if (!$connMILES){
-		echo utf8charset('Não foi possível conectar no banco de dados da MILES.');
+		echo tdc::utf8('Não foi possível conectar no banco de dados da MILES.');
 	}
 
 	return $connMILES;
 }
-function getRegistro($conn = null,$entidade,$campos = "*",$where = "",$propriedades = ""){
+function getRegistro($conn = null,$entidade = null,$campos = "*",$where = "",$propriedades = ""){
 	try{
 		if ($conn == null){
 			global $conn;
@@ -1845,7 +1845,7 @@ function addCampoFormatadoDB($dados,$entidade){
 				case 'descricao':
 				case 'labelzerocheckbox':
 				case 'labelumcheckbox':
-					$dados[$key] = isutf8($value) ? $value : utf8charset($value, 'E');
+					$dados[$key] = isutf8($value) ? $value : tdc::utf8($value);
 				break;
 			}
 		}
@@ -1857,7 +1857,7 @@ function addCampoFormatadoDB($dados,$entidade){
 		$linha 			= array( $key => $value );
 
 		// Converte os acentos, afeta o método tdc::dj(), tdc::da e tdc::pa	
-		$dados[$key] = isutf8($value) ? $value  : utf8charset($value, 'E');
+		$dados[$key] = isutf8($value) ? $value  : tdc::utf8($value);
 
 		if ($tipohtml == 11){
 			$dados[$key . '_formated']	= dateToMysqlFormat($value,true);
@@ -1873,8 +1873,7 @@ function addCampoFormatadoDB($dados,$entidade){
 				if ($campodescdefault->hasData()){
 					$valorfk 				= is_numeric_natural($value)?$value:0;
 					$registro 				= getRegistro(null,tdc::p(ENTIDADE,$atributoOBJ->chaveestrangeira)->nome,$campodescdefault->nome, "id={$valorfk}" , "limit 1");
-					$_utf8charset			= isutf8($registro[$campodescdefault->nome]) ? $registro[$campodescdefault->nome] : utf8charset($registro[$campodescdefault->nome],'E');
-					$dados[$key . "_desc"] 	= $_utf8charset;
+					$dados[$key . "_desc"] 	= tdc::utf8($registro[$campodescdefault->nome]);
 				}
 			}
 		}else if ($tipohtml == 19){

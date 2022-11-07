@@ -100,18 +100,20 @@ final class Conexao{
 			}
 		}
 	}
-	public static function getDados($banco = ''){
+	public static function getDados($banco = '',$sgdb = 'mysql'){
 		/*
 			Tratamento para a transação principal do sistema.
 			Nesse caso deve chamar o arquivo do projeto selecionado
 		*/
 		$database 	= ($banco == '' || $banco == 'current') ? DATABASECONNECTION : $banco;
-		$arq_config = PATH_CURRENT_CONFIG_PROJECT.$database."_mysql.ini";
-		if (!file_exists($arq_config)){
+		$arq_config = PATH_CURRENT_CONFIG_PROJECT.$database.'_'.$sgdb.'.ini';
+		$arq_temp	= PATH_CONFIG . 'temp_'.$sgdb.'.ini';
+		$is_exists 	= !file_exists($arq_config) ? file_exists($arq_temp) ? $arq_config = $arq_temp : false : true;
+
+		if (!$is_exists){
 			if (IS_SHOW_ERROR_MESSAGE){
 				echo "Arquivo <b>{$database}</b> de configuração com o banco de dados não existe. => " . $arq_config . " <= ";
 			}
-			return false;
 		}else{
 			try{
 				if (!$bd = parse_ini_file($arq_config)){
@@ -125,5 +127,25 @@ final class Conexao{
 				return false;
 			}
 		}
+	}
+
+	/*
+		* Método getTemp
+	    * Data de Criacao: 06/11/2022
+	    * Autor @theusdido
+
+		Retorna conexão do arquivo temporário do banco de dados
+	*/
+	public static function getTemp(){
+		$_data = self::getDados('temp');
+		$conn_temp = self::getConnection(
+			$_data['tipo'],
+			$_data['host'],
+			$_data['base'],
+			$_data['usuario'],
+			$_data['senha'],
+			$_data['porta']
+		);
+		return $conn_temp;
 	}
 }

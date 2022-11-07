@@ -11,7 +11,7 @@
 					if ($conn = Transacao::get()){						
 						try{							
 							$sql = str_replace("PREFIXO_",parse_ini_file("config/config.inc")["PREFIXO"]."_",$sql);
-							$result = $conn->query(utf8charset($sql));
+							$result = $conn->query(tdc::utf8($sql));
 							$msg = "Instrução executada com sucesso";
 							$erro = 0;
 							addLog($_POST["query"]);

@@ -2,10 +2,11 @@
 	$script_uri				= isset($_SERVER["SCRIPT_URI"]) ? $_SERVER["SCRIPT_URI"] : '';
 	$request_uri			= isset($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : '';
 	$uri 					= $script_uri != '' ? $script_uri : $request_uri;
+
 	$path_miles_json 		= PATH_MILES . "miles.json";
 
 	if (!file_exists($path_miles_json)){
-		include PATH_MILES . 'core/controller/install/criarmilesjson.php';
+		include $_path_controller_install . 'criarmilesjson.php';
 	}
 
 	if (sizeof(file($path_miles_json)) <= 0){
@@ -15,15 +16,16 @@
 
 	$_project_name	= '';
 	$_enviromment	= 'dev';
-	$_env 			= '';
+	$_env 			= '';	
 	$miles_json 	= file_get_contents($path_miles_json);
-	if ($miles_json !== false){
+
+	if ($miles_json != false){
 
 		// MILES JSON CONFIG
 		$mjc = json_decode($miles_json);
 
 		// Seta o projeto no MILES 
-		define('MILES_PROJECT',$mjc->currentproject);
+		define('MILES_PROJECT',isset($mjc->currentproject)?$mjc->currentproject:1);
 
 		// Ambiente selecionado
 		$_enviromment = isset($mjc->enviromment) ? $mjc->enviromment : '';
@@ -33,6 +35,9 @@
 
 		// Diretório da instalação do MILES FRAMEWORK
 		define("FOLDER_MILES",$mjc->folder);
+
+		// Atualiza o nome do diretório de instalação do MILES
+		$_folder_miles = FOLDER_MILES;
 
 		// Nome do Projeto
 		$_project_name = isset($mjc->project->name)?$mjc->project->name:'';

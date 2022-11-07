@@ -45,5 +45,5 @@
             echo json_encode($modules);
         break;
         default:            
-            include 'core/install/configuracaopacotes.php';        
+            include PATH_MILES_LIBRARY . 'install/configuracaopacotes.php';        
     }

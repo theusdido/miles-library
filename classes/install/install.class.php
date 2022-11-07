@@ -87,32 +87,52 @@ class tdInstall {
 
 		Retorna se o sistema instalado está instalado
 	*/
-	public static function isInstalled($database){
-		$conn = Conexao::getConnection(
-			null,
-			$database->host,
-			$database->base,
-			$database->user,
-			$database->password,
-			$database->port
-		);
-		
+	public static function isInstalled(){
 		try{
-			$sqlverifica = "select 1 from information_schema.TABLES where table_name = 'td_instalacao' AND table_schema = '{$database->base}';";
+			$conn = Conexao::getTemp();
+			$sql = "SELECT 1 FROM td_instalacao WHERE sistemainstalado = 1";
+			$query = $conn->query($sql);
+			if ($query->rowCount() > 0){
+				return true;
+			}else{
+				return false;
+			}
+			throw new ErrorException("Banco de Dados <b>{$database->base}</b> não está instalado.");
+		}catch(Throwable $t){
+			return false;
+		}
+	}
+
+	/*  
+		* Método isCreateDatabase
+	    * Data de Criacao: 06/11/2022
+	    * Author @theusdido
+
+		Retorna se o banco de dados está criado
+	*/
+	public static function isCreateDatabase($database){
+		try{
+			$conn = Conexao::getConnection(
+				$database->type,
+				$database->host,
+				$database->base,
+				$database->user,
+				$database->password,
+				$database->port
+			);			
+			$sqlverifica = "
+				SELECT 1 FROM information_schema.TABLES 
+				WHERE table_name = 'td_instalacao' 
+				AND table_schema = '{$database->base}';
+			";
 			$queryverifica = $conn->query($sqlverifica);
 			if ($queryverifica->rowCount() > 0){
-				$sql = "SELECT 1 FROM td_instalacao WHERE sistemainstalado = 1";
-				$query = $conn->query($sql);
-				if ($query->rowCount() > 0){
-					return true;
-				}else{
-					return false;
-				}
+				return true;
 			}else{
 				return false;
 			}			
 			throw new Exception("Banco de Dados <b>{$database->base}</b> não está instalado.");
-		}catch(Exception $e){
+		}catch(Throwable $e){
 			return false;
 		}
 	}

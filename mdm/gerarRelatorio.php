@@ -128,7 +128,7 @@
 			else echo $parms;
 		}elseif($cur_encoding == "ISO 8859-1" && mb_check_encoding($parms,'ISO 8859-1')){
 			if ($retorno) return $parms;
-			else echo executefuncion("utf8charset",array($parms));
+			else echo executefuncion("tdc::utf8",array($parms));
 		}else{
 			if ($retorno) return $parms;
 			else echo utf8_encode($parms);

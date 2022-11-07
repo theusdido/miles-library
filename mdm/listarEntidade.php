@@ -25,14 +25,14 @@
 							<td width="40%">Nome</td>
 							<td width="5%" align="center">Editar</td>
 							<td width="5%" align="center">Atributo</td>
-							<td width="5%" align="center">Aba</td>
+							<td width="5%" align="center">Gerar</td>
 							<td width="5%" align="center">Excluir</td>
 						</tr>	
 						<?php
 							$sql = "SELECT id,nome,descricao FROM ".PREFIXO."entidade ORDER BY id DESC";
 							$query = $conn->query($sql);
 							foreach ($query->fetchAll() as $linha){
-								$descricao = executefunction("utf8charset",array($linha["descricao"],5));
+								$descricao = $linha["descricao"];
 								echo "	<tr>
 											<td>{$linha["id"]}</td>
 											<td>{$descricao}</td>
@@ -49,8 +49,8 @@
 											</td>
 											
 											<td align='center'>
-												<button type='button' class='btn btn-primary' onclick=location.href='criarAba.php?entidade={$linha["id"]}&".getURLParamsProject()."'>
-													<span class='fas fa-credit-card' aria-hidden='true'></span>
+												<button type='button' class='btn btn-primary' onclick='gerarCadastro({$linha["id"]});'>
+													<span class='fas fa-code' aria-hidden='true'></span>
 												</button>
 											</td>
 											
@@ -73,6 +73,27 @@
 					location.href='excluirEntidade.php?entidade=' + id + "&<?=getURLParamsProject()?>";
 				}
 			}
+
+			function gerarCadastro(entidade_id){
+				$.ajax({
+					url:"<?=URL_API?>",
+					data:{
+						controller:"gerarcadastro",
+						entidade:entidade_id,
+						principal:true,
+						acao:'compilar'
+					},
+					beforeSend:function(){
+					},					
+					complete:function(retorno){
+						bootbox.alert('Arquivos Gerados !');
+					},
+					error:function(){
+						bootbox.alert('Erro ao gerar os arquivos !');
+					}
+				});
+			}
+
 		</script>
 	</body>
 </html>	

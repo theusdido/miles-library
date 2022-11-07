@@ -28,7 +28,7 @@
 
 	if (!empty($_POST)){
 		$nome			 			= isset($_POST["nome"])?$_POST["nome"]:'';		
-		$descricao 					= executefunction("utf8charset",array($_POST["descricao"]));
+		$descricao 					= executefunction("tdc::utf8",array($_POST["descricao"]));
 		$ncolunas					= ($_POST["ncolunas"]=='')?0:$_POST["ncolunas"];
 		$exibirmenuadministracao 	= isset($_POST["exibirmenuadministracao"])?1:0;
 		$exibircabecalho 			= isset($_POST["exibircabecalho"])?1:0;
@@ -122,8 +122,8 @@
 
 		$query = $conn->query($sql);
 		foreach ($query->fetchAll() as $linha){
-			$nome 						= executefunction("utf8charset",array($linha["nome"]));
-			$descricao 					= executefunction("utf8charset",array($linha["descricao"]));
+			$nome 						= executefunction("tdc::utf8",array($linha["nome"]));
+			$descricao 					= executefunction("tdc::utf8",array($linha["descricao"]));
 			$exibirmenuadministracao 	= $linha["exibirmenuadministracao"];
 			$exibircabecalho 			= $linha["exibircabecalho"];
 			$ncolunas 					= $linha["ncolunas"];
@@ -243,7 +243,7 @@
 											$sql = "SELECT id,descricao FROM ".PREFIXO."atributo WHERE entidade = " . $id;
 											$query = $conn->query($sql);
 											foreach($query->fetchAll() as $linha){
-												echo '<option value="'.$linha["id"].'">'.executefunction("utf8charset",array($linha["descricao"])).'</option>';
+												echo '<option value="'.$linha["id"].'">'.executefunction("tdc::utf8",array($linha["descricao"])).'</option>';
 											}						
 										}					
 									?>
@@ -258,7 +258,7 @@
 											$sql = "SELECT id,descricao FROM ".PREFIXO."atributo WHERE entidade = " . $id;
 											$query = $conn->query($sql);
 											foreach($query->fetchAll() as $linha){
-												echo '<option value="'.$linha["id"].'">'.executefunction("utf8charset",array($linha["descricao"])).'</option>';						
+												echo '<option value="'.$linha["id"].'">'.executefunction("tdc::utf8",array($linha["descricao"])).'</option>';						
 											}						
 										}					
 									?>

@@ -27,8 +27,8 @@
                 // Para criar o schema não pode pegar a conexão com a base
                 $conexao    = Conexao::getConnection($tipo,$host,'',$usuario,$senha,$porta);
 
-                $conexao->exec("CREATE DATABASE IF NOT EXISTS {$base};");
-                $conexao->exec("USE {$base};");
+                $conexao->exec("CREATE DATABASE IF NOT EXISTS `{$base}`;");
+                $conexao->exec("USE `{$base}`;");
                 $conexao->exec("CREATE TABLE IF NOT EXISTS td_instalacao (id int not null primary key, bancodedadoscriado tinyint, sistemainstalado tinyint, pacoteconfigurado tinyint);");
                 $conexao->exec("INSERT INTO td_instalacao (id,bancodedadoscriado,sistemainstalado,pacoteconfigurado) VALUES (1,1,0,0);");
                 $conexao->exec("CREATE TABLE IF NOT EXISTS td_conexoes (id int not null primary key, host varchar(60), base varchar(60), porta varchar(15) , usuario varchar(60) , senha varchar(200) , tipo varchar(15));");
@@ -41,9 +41,12 @@
                 $_SESSION["db_user"]        = $usuario;
                 $_SESSION["db_password"]    = $senha;
                 $_SESSION["db_port"]        = $porta;                
+                
 
+                // Cria arquivo de configuração temporário
+                Config::createFileDbIni(PATH_CONFIG,$_SESSION);
                 echo 1;
-            }catch(Exception $e){
+            }catch(Throwable $e){
                 echo '<div class="alert alert-danger" role="alert">Erro ao conexão base de dados. Motivo: ' . $e->getMessage();
                 foreach ($conn->errorInfo() as $erro){
                     echo $erro . "</br>";

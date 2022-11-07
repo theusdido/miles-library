@@ -29,6 +29,6 @@ final class SqlDeletar extends sqlInstrucao{
 				$this->sql .= ' WHERE '. $expressao;
 			}
 		}	
-		return utf8charset($this->sql);
+		return tdc::utf8($this->sql);
 	}	
 }

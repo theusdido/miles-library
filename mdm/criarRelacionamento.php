@@ -8,7 +8,7 @@
 			$sql = "SELECT id,descricao,nome FROM ".PREFIXO."atributo WHERE entidade = " . $_GET["entidade"];
 			$query = $conn->query($sql);
 			foreach($query->fetchAll() as $linha){
-				echo '<option value="'.$linha["id"].'">'.executefunction("utf8charset",array($linha["descricao"])).' [ '.$linha["nome"].' ]</option>';
+				echo '<option value="'.$linha["id"].'">'.executefunction("tdc::utf8",array($linha["descricao"])).' [ '.$linha["nome"].' ]</option>';
 			}
 		}
 		exit;
@@ -37,7 +37,7 @@
 		$entidade	 			= $_POST["entidade"];
 		$entidadefilho			= $_POST["entidadefilho"];
 		$atributo 				= isset($_POST["atributo"])?($_POST["atributo"]==""?"0":$_POST["atributo"]):"0";
-		$descricao				= executefunction("utf8charset",array($_POST["descricao"]));
+		$descricao				= executefunction("tdc::utf8",array($_POST["descricao"]));
 		
 		switch($tipo){
 			case 1: case 7: case 3: case 9: $cardinalidade = "11"; break;
@@ -71,7 +71,7 @@
 		foreach ($query->fetchAll() as $linha){			
 			$tipo 			= $linha["tipo"];			
 			$atributo		= $linha["atributo"];
-			$descricao		= executefunction("utf8charset",array($linha["descricao"]));
+			$descricao		= executefunction("tdc::utf8",array($linha["descricao"]));
 			$entidadefilho 	= $linha["filho"];
 		}
 	}
@@ -219,7 +219,7 @@
 										$sql = "SELECT id,nome,descricao FROM ".PREFIXO."entidade ORDER BY id DESC;";
 										$query = $conn->query($sql);
 										foreach($query->fetchAll() as $linha){
-											echo '<option value="'.$linha["id"].'">[ '.$linha["id"].' ] '.executefunction("utf8charset",array($linha["descricao"])).' [ '.$linha["nome"].' ]</option>';
+											echo '<option value="'.$linha["id"].'">[ '.$linha["id"].' ] '.executefunction("tdc::utf8",array($linha["descricao"])).' [ '.$linha["nome"].' ]</option>';
 										}
 									?>
 								</select>								

@@ -1,6 +1,7 @@
 <?php
-
-	$miles_json 	= json_decode(file_get_contents('../../miles.json'));
+	
+	$relative_path	= '../../../../';
+	$miles_json 	= json_decode(file_get_contents($relative_path . 'miles.json'));
 	date_default_timezone_set('America/Sao_Paulo');	
 
 	if (isset($miles_json->currentproject)){
@@ -13,27 +14,32 @@
 		session_name("miles_SISTEMA_" . $_currentproject_id);
 		session_start();
 	}
-
+	$request_schema = isset($_SERVER["HTTP_X_FORWARDED_PROTO"])?$_SERVER["HTTP_X_FORWARDED_PROTO"]:$_SERVER["REQUEST_SCHEME"];
+	
+	
 	define('CURRENT_PROJECT_ID',$_currentproject_id);
 	define('IS_SHOW_ERROR_MESSAGE',true);
 	define('URL_FAVICON','');
+	define('URL_LIB', $miles_json->system->url->lib);
+	define('URL_MILES',$request_schema . '://'.$_SERVER["HTTP_HOST"].'/' . $miles_json->folder);
+	define('PATH_CONFIG','../config/');
+	define('PREFIXO',$miles_json->prefix . '_');
+	define('URL_API',$relative_path . 'index.php');
+	define('FOLDER_PROJECT','project');
+	define('URL_PROJECT', URL_MILES . FOLDER_PROJECT .'/');
+	define('PATH_PROJECT',$relative_path . FOLDER_PROJECT .'/');
+	define('PATH_CURRENT_CONFIG_PROJECT',PATH_PROJECT . 'config');
+	define('URL_CURRENT_THEME', URL_PROJECT . 'tema/' . $miles_json->theme .'/');
+	
 
-	$currentproject 	= $_currentproject_id;	
-	$config_path 		= "../../projects/{$currentproject}/config/";
-	$config_file 		= $config_path . "current_config.inc";
+	$config_file 		= PATH_CURRENT_CONFIG_PROJECT. "current_config.inc";
 
 	require '../classes/bd/conexao.class.php';
-	if (file_exists($config_file)){
-		$config = parse_ini_file($config_file);
-	}else{
-		throw new Exception("Arquivo configuração não existe");
-	}
-
 	$currenttypedatabase 	= $miles_json->database_current;
 	$currentprojectname 	= $miles_json->project->name;
 
 	define("DATABASECONNECTION",$currenttypedatabase);
-	define("PATH_CURRENT_CONFIG_PROJECT",$config_path);	
+	
 	
 	$conn = Conexao::Abrir($currenttypedatabase);
 
@@ -46,7 +52,7 @@
 		default: $type = 1;
 	}
 
-	$sqlProductionDB = "SELECT * from td_connectiondatabase WHERE projeto = {$currentproject} AND type = 4";
+	$sqlProductionDB = "SELECT * from td_connectiondatabase WHERE projeto = {$_currentproject_id} AND type = 4";
 	$queryProductionDB = $connMiles->query($sqlProductionDB);
 	if ($queryProductionDB->rowCount() > 0){
 		if ($linhaProductionDB = $queryProductionDB->fetch()){
@@ -68,7 +74,7 @@
 		$connProducao = null;
 	}
 	
-	$sqlCurrentDB = "SELECT * from td_connectiondatabase WHERE projeto = {$currentproject} AND type = {$type}";
+	$sqlCurrentDB = "SELECT * from td_connectiondatabase WHERE projeto = {$_currentproject_id} AND type = {$type}";
 	$queryCurrentDB = $connMiles->query($sqlCurrentDB);
 	if ($linhaCurrentDB = $queryCurrentDB->fetch()){
 		$tipo 		= "mysql";
@@ -79,6 +85,3 @@
 		$senha 		= $linhaCurrentDB["password"];
 		$conn 		= new PDO("$tipo:host=$host;port=$porta;dbname=$base",$usuario,$senha);
 	}
-
-	define('URL_LIB', $miles_json->system->url->lib);
-	define('URL_MILES','https://primodass.com.br/miles/');

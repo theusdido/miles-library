@@ -21,7 +21,7 @@
 
         $valores    = array(
             $de['id'],
-            '"' . utf8charset($de['descricao'],5) . '"',
+            '"' . tdc::utf8($de['descricao']) . '"',
             $de['td_entidade'],
             '"' . $de['urlpersonalizada'] . '"',
         );

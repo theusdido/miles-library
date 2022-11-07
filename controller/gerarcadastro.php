@@ -159,12 +159,8 @@
 	switch(tdc::r("acao")){
 		case "compilar":
 			echo 1;
-
-			// Cria o arquivo HTML
-			$fp = fopen($pathfilepage . $entidade->contexto->nome . ".html" ,'w');
-			fwrite($fp,$bloco->toString());
-			fclose($fp);
-
+			getUrl(URL_MILES . 'index.php?controller=mdm/componente&entidade=' . $entidade->contexto->id);
+			tdFile::add($pathfilepage . $entidade->contexto->nome . ".html", $bloco->toString());
 		break;
 		default:
 			// Exibe o resultado HTML do bloco

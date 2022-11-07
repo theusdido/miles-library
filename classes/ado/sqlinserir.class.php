@@ -74,6 +74,6 @@ final class SqlInserir extends sqlInstrucao{
 		$this->sql .= $colunas . ")";
 		$this->sql .= " VALUES ({$valores})";
 		
-		return utf8charset($this->sql);
+		return tdc::utf8($this->sql);
 	}	
 }

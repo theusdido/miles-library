@@ -28,7 +28,7 @@
 			$sql = "SELECT id,descricao FROM td_grupousuario";
 			$query = $conn->query($sql);
 			while($linha = $query->fetch()){
-				$descricao = executefunction("utf8charset",array($linha["descricao"],5));
+				$descricao = executefunction("tdc::utf8",array($linha["descricao"]));
 				echo "<li href='#' class='list-group-item'>";
 				echo "		<div class='cabecalho-lista-usuario' id='".$linha["id"]."'>";
 				echo "			<span class='fas fa-folder' aria-hidden='true'></span>";
@@ -368,7 +368,7 @@
 						$sql = "SELECT id,descricao FROM td_entidade";
 						$rs = $conn->query($sql);
 						while ($linha = $rs->fetch()){
-							$descricao = executefunction("utf8charset",array($linha["descricao"],5));
+							$descricao = executefunction("tdc::utf8",array($linha["descricao"]));
 							echo "<tr data-entidadeid='".$linha["id"]."' data-entidadedescricao='".$descricao."'>";
 							echo "		<td><small>".$descricao."</small></td>";
 							echo "		<td><center><input type='checkbox' onclick=setaPermissao(this,'entidade'); data-op='adicionar' /></center></td>";
@@ -416,7 +416,7 @@
 						$sql = "SELECT id,descricao FROM td_funcao";
 						$rs = $conn->query($sql);
 						while ($linha = $rs->fetch()){
-							$descricao = executefunction("utf8charset",array($linha["descricao"],5));
+							$descricao = executefunction("tdc::utf8",array($linha["descricao"]));
 							echo "	<tr funcaoid='".$linha["id"]."'>";
 							echo "		<td><small>".$descricao."</small></td>";
 							echo "		<td><center><input type='checkbox' onclick=setaPermissao(this,'funcao'); id='".$linha["id"]."' data-op='funcao' /></center></td>";
@@ -450,7 +450,7 @@
 						$sql = "SELECT id,descricao FROM td_menu WHERE pai = 0 or pai is null or entidade = 0 or entidade is null;";
 						$rs = $conn->query($sql);
 						while ($linha = $rs->fetch()){
-							$descricao = executefunction("utf8charset",array($linha["descricao"],5));
+							$descricao = executefunction("tdc::utf8",array($linha["descricao"]));
 							echo "	<tr menuid='".$linha["id"]."'>";
 							echo "		<td><small>".$descricao."</small></td>";
 							echo "		<td><center><input type='checkbox' onclick=setaPermissao(this,'menu'); id='".$linha["id"]."' data-op='menu' /></center></td>";

@@ -20,11 +20,17 @@
 	*	@return: String
 */
 function removeBarraRoot($path){
-	if (substr($path,0,1) == '/'){
-		return substr($path,1,strlen($path));
-	}else{
-		return $path;
+	$new_path = $path;
+	// Verifica o primeiro caracter
+	if (substr($new_path,0,1) == '/'){
+		$new_path = substr($new_path,1,strlen($new_path));
 	}
+
+	// Verifica o último caracter
+	if (substr($new_path,-1,1) == '/'){
+		$new_path = substr($new_path,0,strlen($new_path) - 1);
+	}
+	return $new_path;
 }
 /*
 	* showMessage

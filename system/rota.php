@@ -1,6 +1,4 @@
 <?php
-	$controller 		= tdc::r("_controller") == '' ? tdc::r("controller") : tdc::r("_controller");
-	$_controller		= tdc::r("_controller"); # Novo padrão com _ na frente
 	$systemcontroller 	= PATH_MVC_CONTROLLER . $controller .  '.php';
 	$systemrequisicoes	= PATH_MVC_CONTROLLER . 'requisicoes.php';
 	$systemautentica	= PATH_MVC_CONTROLLER . 'autentica.php';
@@ -23,12 +21,14 @@
 		$_component_path		= $_component . '/' . $_component;
 	}
 
-	$_systemcomponent			= PATH_SYSTEM_COMPONENT . $_component_path . ".php";
-	$_customcomponent			= PATH_CURRENT_COMPONENT . $_component_path . ".php";
+	if ($_component_path != ''){
+		$_systemcomponent			= PATH_SYSTEM_COMPONENT . $_component_path . ".php";
+		$_customcomponent			= PATH_CURRENT_COMPONENT . $_component_path . ".php";
+	}
 	// Fim Component
 
 	// Tratamento para requisição a uma página - by @theusdido 02/10/2021
-	$_page				= tdc::r("page");
+	$_page				= tdc::r("page",tdc::r('_page'));
 	if (strpos($_page,"/") > -1){
 		if (preg_match("/{{[a-z)]+}}/i",$_page,$match)){
 			$_page			= str_replace(array('{{','}}'),'',$_page);
@@ -38,13 +38,20 @@
 		}
 	}
 
-	$_systempage		= PATH_SYSTEM_PAGE . $_page . ".php";
-	$_custompage		= PATH_CURRENT_PAGE . $_page . ".php";
+	if ($_page != ''){
+		$_systempage		= PATH_SYSTEM_PAGE . $_page . ".php";
+		$_custompage		= PATH_CURRENT_PAGE . $_page . ".php";
+	}
 	// Fim Page
 
 	$systemview 		= '';
 	$customview			= '';
 
+	if ($_controller == "page" && $_page != ''){
+		if (file_exists($customcontroller)) include $customcontroller;
+		if (file_exists($systemcontroller)) include $systemcontroller;
+		exit;
+	}	
 
 	if ($controller == "gerarcadastro" || tdClass::Read("key") == "k"){
 		if (file_exists($customcontroller)) include $customcontroller;

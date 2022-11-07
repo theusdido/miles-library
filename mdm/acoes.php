@@ -17,7 +17,7 @@
 	}
 	if (!empty($_POST)){
 		$nome			 			= isset($_POST["nome"])?$_POST["nome"]:'';
-		$descricao 					= utf8charset($_POST["descricao"]);
+		$descricao 					= tdc::utf8($_POST["descricao"]);
 		$ncolunas					= ($_POST["ncolunas"]=='')?0:$_POST["ncolunas"];
 		$exibirmenuadministracao 	= isset($_POST["exibirmenuadministracao"])?1:0;
 		$exibircabecalho 			= isset($_POST["exibircabecalho"])?1:0;

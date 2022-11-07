@@ -16,7 +16,6 @@
 		var formulario          = [];
 	');
 	
-	$localCharset 	= 9;
 	$dataset 		= tdClass::Criar("repositorio",array(ENTIDADE))->carregar();
 	if ($dataset){
 		foreach ($dataset as $entidade){
@@ -27,7 +26,7 @@
 			// 
 			$filtro_relacionamento	= tdc::f();
 			$filtro_relacionamento->addFiltro("pai","=",$entidade->id);
-			fwrite($mdmJSCompile,utf8charset("
+			fwrite($mdmJSCompile,"
 				td_entidade[{$entidade->id}] = {
 					id:{$entidade->id},
 					nome:'{$entidade->nome}',
@@ -45,7 +44,7 @@
 					atributos:".tdc::dj(ATRIBUTO,$filtro_atributo).",
 					relacionamentos:".tdc::dj(RELACIONAMENTO,$filtro_relacionamento)."
 				};
-			",$localCharset));
+			");
 		}
 	}
 
@@ -53,7 +52,7 @@
 	$dataset = tdClass::Criar("repositorio",array(ATRIBUTO))->carregar();	
 	if ($dataset){
 		foreach ($dataset as $atributo){
-			fwrite($mdmJSCompile,utf8charset("
+			fwrite($mdmJSCompile,"
 				td_atributo[{$atributo->id}] = {
 					id:{$atributo->id},
 					entidade:'{$atributo->entidade}',
@@ -83,14 +82,14 @@
 					criarsomatoriogradededados:'{$atributo->criarsomatoriogradededados}',
 					naoexibircampo:'{$atributo->naoexibircampo}'
 				};
-			",$localCharset));		
+			");		
 		}
 	}
 	// Relacionamentos do Sistema	
 	$dataset = tdClass::Criar("repositorio",array(RELACIONAMENTO))->carregar();		
 	if ($dataset){
 		foreach ($dataset as $relacionamento){
-			fwrite($mdmJSCompile,utf8charset("
+			fwrite($mdmJSCompile,"
 				td_relacionamento[{$relacionamento->id}] = {
 					id:{$relacionamento->id},
 					pai:'{$relacionamento->pai}',
@@ -101,7 +100,7 @@
 					controller:'{$relacionamento->controller}',
 					cardinalidade:'{$relacionamento->cardinalidade}'
 				};
-			",$localCharset));
+			");
 		}
 	}
 
@@ -110,7 +109,7 @@
 	$dataset = tdClass::Criar("repositorio",array(PERMISSOES))->carregar();
 	if ($dataset){
 		foreach ($dataset as $permissoes){
-			fwrite($mdmJSCompile,utf8charset("
+			fwrite($mdmJSCompile,"
 				td_permissoes[{$permissoes->id}] = {
 					id:'{$permissoes->id}',
 					projeto:'{$permissoes->projeto}',
@@ -122,18 +121,18 @@
 					editar:'{$permissoes->editar}',
 					visualizar:'{$permissoes->visualizar}',
 					atributos:{
-			",$localCharset));
-			fwrite($mdmJSCompile,utf8charset("
+			");
+			fwrite($mdmJSCompile,"
 					}
 				};
-			",$localCharset));
+			");
 		}
 	}
 
 	$dataset = tdClass::Criar("repositorio",array(FILTROATRIBUTO))->carregar();		
 	if ($dataset){
 		foreach ($dataset as $filtroatributo){
-			fwrite($mdmJSCompile,utf8charset("
+			fwrite($mdmJSCompile,"
 				td_filtroatributo[{$filtroatributo->id}] = {
 					id:'{$permissoes->id}',
 					atributo:'{$filtroatributo->atributo}',
@@ -141,7 +140,7 @@
 					operador:'{$filtroatributo->operador}',
 					valor:'{$filtroatributo->valor}'
 				};
-			",$localCharset));
+			");
 		}
 	}
 
@@ -155,7 +154,7 @@
 			$exibirbotaoexcluir		= json_encode($consultas->exibirbotaoexcluir);
 			$exibirbotaoemmassa		= json_encode($consultas->exibirbotaoemmassa);
 
-			fwrite($mdmJSCompile,utf8charset("
+			fwrite($mdmJSCompile,"
 				td_consulta[{$consultas->id}] = {
 					id:'{$consultas->id}',
 					projeto:'{$consultas->projeto}',
@@ -167,13 +166,13 @@
 					exibirexcluir:{$exibirbotaoexcluir},
 					exibiremmassa:{$exibirbotaoemmassa},
 					filtros:{
-			",$localCharset));			
+			");			
 			$sqlFiltros = "SELECT id,operador,atributo FROM td_consultafiltro a WHERE consulta = " . $consultas->id;
 			$queryFiltros = $conn->query($sqlFiltros);
 			$iAP = 1;
 			$tAP = $queryFiltros->rowcount();
 			While ($linhaFiltros = $queryFiltros->fetch()){
-				fwrite($mdmJSCompile,utf8charset('"'.$linhaFiltros["id"].'":{"atributo":"'.$linhaFiltros["atributo"].'","operador":"'.$linhaFiltros["operador"].'"}',$localCharset));
+				fwrite($mdmJSCompile,'"'.$linhaFiltros["id"].'":{"atributo":"'.$linhaFiltros["atributo"].'","operador":"'.$linhaFiltros["operador"].'"}');
 				if ($iAP < $tAP) fwrite($mdmJSCompile,",");
 				$iAP++;
 			}
@@ -186,7 +185,7 @@
 			$iAP = 1;
 			$tAP = $queryStatus->rowcount();
 			While ($linhaStatus = $queryStatus->fetch()){
-				fwrite($mdmJSCompile,utf8charset('"'.$linhaStatus["id"].'":{"atributo":"'.$linhaStatus["atributo"].'","operador":"'.$linhaStatus["operador"].'","valor":"'.$linhaStatus["valor"].'","status":"'.$linhaStatus["status"].'"}',$localCharset));
+				fwrite($mdmJSCompile,'"'.$linhaStatus["id"].'":{"atributo":"'.$linhaStatus["atributo"].'","operador":"'.$linhaStatus["operador"].'","valor":"'.$linhaStatus["valor"].'","status":"'.$linhaStatus["status"].'"}');
 				if ($iAP < $tAP) fwrite($mdmJSCompile,",");
 				$iAP++;
 			}
@@ -217,7 +216,7 @@
 	$dataset = tdClass::Criar("repositorio",array(RELATORIO))->carregar();		
 	if ($dataset){
 		foreach ($dataset as $relatorios){
-			fwrite($mdmJSCompile,utf8charset("
+			fwrite($mdmJSCompile,"
 				td_relatorio[{$relatorios->id}] = {
 					id:'{$relatorios->id}',
 					projeto:'{$relatorios->projeto}',
@@ -225,13 +224,13 @@
 					entidade:'{$relatorios->entidade}',
 					descricao:'{$relatorios->descricao}',
 					filtros:{
-			",$localCharset));
+			");
 			$sqlFiltros = "SELECT id,operador,atributo FROM td_relatoriofiltro a WHERE relatorio = " . $relatorios->id;
 			$queryFiltros = $conn->query($sqlFiltros);
 			$iAP = 1;
 			$tAP = $queryFiltros->rowcount();
 			While ($linhaFiltros = $queryFiltros->fetch()){
-				fwrite($mdmJSCompile,utf8charset('"'.$linhaFiltros["id"].'":{"atributo":"'.$linhaFiltros["atributo"].'","operador":"'.$linhaFiltros["operador"].'"}',$localCharset));
+				fwrite($mdmJSCompile,'"'.$linhaFiltros["id"].'":{"atributo":"'.$linhaFiltros["atributo"].'","operador":"'.$linhaFiltros["operador"].'"}');
 				if ($iAP < $tAP) fwrite($mdmJSCompile,",");
 				$iAP++;
 			}
@@ -244,7 +243,7 @@
 			$iAP = 1;
 			$tAP = $queryStatus->rowcount();
 			While ($linhaStatus = $queryStatus->fetch()){
-				fwrite($mdmJSCompile,utf8charset('"'.$linhaStatus["id"].'":{"atributo":"'.$linhaStatus["atributo"].'","operador":"'.$linhaStatus["operador"].'","valor":"'.$linhaStatus["valor"].'","status":"'.$linhaStatus["status"].'"}',$localCharset));
+				fwrite($mdmJSCompile,'"'.$linhaStatus["id"].'":{"atributo":"'.$linhaStatus["atributo"].'","operador":"'.$linhaStatus["operador"].'","valor":"'.$linhaStatus["valor"].'","status":"'.$linhaStatus["status"].'"}');
 				if ($iAP < $tAP) fwrite($mdmJSCompile,",");
 				$iAP++;
 			}
@@ -259,13 +258,13 @@
 	if ($dataset){
 		$td_status_descricao = array();
 		foreach ($dataset as $status){
-			fwrite($mdmJSCompile,utf8charset("
+			fwrite($mdmJSCompile,"
 				td_status[{$status->id}] = {
 					id:'{$status->id}',
 					descricao:'{$status->descricao}',
 					classe:'{$status->classe}'
 				};
-			",$localCharset));
+			");
 			array_push($td_status_descricao, "'".$status->classe."'");
 		}
 		fwrite($mdmJSCompile,'var td_status_class = ['.implode(',',$td_status_descricao).'];');
@@ -274,13 +273,13 @@
 	$dataset = tdClass::Criar("repositorio",array("td_movimentacao"))->carregar();
 	if ($dataset){
 		foreach ($dataset as $movimentacao){
-			fwrite($mdmJSCompile,utf8charset("
+			fwrite($mdmJSCompile,"
 				td_movimentacao[{$movimentacao->id}] = {
 					id:'{$movimentacao->id}',
 					descricao:'{$movimentacao->descricao}',
 					classe:'{$movimentacao->entidade}'
 				};
-			",$localCharset));
+			");
 		}
 	}
 	fclose($mdmJSCompile);

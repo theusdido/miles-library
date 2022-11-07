@@ -4,8 +4,7 @@
     array( "name" => "geral", "title" => "Geral", "components" => 
       array(
         array('name' => 'carrinhocompras' , 'title' => 'Carrinho de Compras'),
-        array('name' => 'cliente' , 'title' => 'Cliente'),
-        array('name' => 'endereco' , 'title' => 'Endereço'),
+        array('name' => 'cliente' , 'title' => 'Cliente'),        
         array('name' => 'configuracoes' , 'title' => 'Configurações'),
         array('name' => 'recuperacaosenha' , 'title' => 'Recuperar Senha'),
         array('name' => 'loja'                    ,'title' => 'Loja'),
@@ -85,6 +84,14 @@
         array( 'name' => 'transportadora' , 'title' => 'Transportadora' ),
         array( 'name' => 'taxaentrega' , 'title' => 'Taxa de Entrega' ),
         array( 'name' => 'expedicao' , 'title' => 'Expedição' )
+      )
+    ),
+    array( "name" => "endereco", "title" => "Endereço", "components" => 
+      array(
+        array('name' => 'pais' , 'title' => 'País'),
+        array('name' => 'uf' , 'title' => 'Estado'),
+        array('name' => 'cidade' , 'title' => 'Cidade'),
+        array('name' => 'bairro' , 'title' => 'Bairro')
       )
     )
   );

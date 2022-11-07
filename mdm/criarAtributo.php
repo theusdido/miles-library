@@ -14,7 +14,7 @@
 	if (isset($_POST["salvar"])){
 		#$conn->beginTransaction();
 		$nome = $_POST["nome"];
-		$descricao = executefunction("utf8charset",array($_POST["descricao"],6));
+		$descricao = executefunction("tdc::utf8",array($_POST["descricao"],6));
 		$tipo = $_POST["tipo"];		
 		$tamanho = isset($_POST["tamanho"])?$_POST["tamanho"]:0;
 		if ($tipo == "char" || $tipo == "varchar"){
@@ -97,9 +97,9 @@
 		$sql = "SELECT entidade,nome,descricao,tipo,tamanho,nulo,tipohtml,exibirgradededados,chaveestrangeira,dataretroativa,inicializacao,readonly,indice,tipoinicializacao,atributodependencia,labelzerocheckbox,labelumcheckbox,legenda,desabilitar,criarsomatoriogradededados,naoexibircampo FROM ".PREFIXO."atributo WHERE id = {$id}";
 		$query = $conn->query($sql);
 		foreach($query->fetchAll() as $linha){
-			$entidade					= executefunction("utf8charset",array($linha["entidade"]));
+			$entidade					= executefunction("tdc::utf8",array($linha["entidade"]));
 			$nome						= $linha["nome"];
-			$descricao					= executefunction("utf8charset",array($linha["descricao"]));
+			$descricao					= executefunction("tdc::utf8",array($linha["descricao"]));
 			$tipo						= $linha["tipo"];
 			$tamanho					= $linha["tamanho"];
 			$nulo 						= $linha["nulo"];
@@ -764,7 +764,7 @@
 										$sql = "SELECT id,descricao,nome FROM ".PREFIXO."entidade ORDER BY id DESC";
 										$query = $conn->query($sql);
 										foreach($query->fetchAll() as $linha){
-											echo '<option value="'.$linha["id"].'">'.executefunction("utf8charset",array($linha["descricao"])) . " ( ".$linha["nome"]." ) [ " . ($linha["id"]<10?"0":"") . $linha["id"] ." ]" . '</option>';
+											echo '<option value="'.$linha["id"].'">'.executefunction("tdc::utf8",array($linha["descricao"])) . " ( ".$linha["nome"]." ) [ " . ($linha["id"]<10?"0":"") . $linha["id"] ." ]" . '</option>';
 											
 										}
 									?>
@@ -855,7 +855,7 @@
 										$sql = "SELECT id,descricao FROM ".PREFIXO."atributo WHERE entidade = " . $entidade  . (isset($_GET["id"])?" and id <> " . $id:"");
 										$query = $conn->query($sql);
 										foreach($query->fetchAll() as $linha){
-											echo '<option value="'.$linha["id"].'">'.($linha["id"]<10?"0":"") . $linha["id"] ." - ".executefunction("utf8charset",array($linha["descricao"])).'</option>';
+											echo '<option value="'.$linha["id"].'">'.($linha["id"]<10?"0":"") . $linha["id"] ." - ".executefunction("tdc::utf8",array($linha["descricao"])).'</option>';
 										}
 									?>
 								</select>

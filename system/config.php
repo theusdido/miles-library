@@ -16,7 +16,7 @@
 	define('PORT', $_port);
 
 	// Classe de Configuração do sistema
-	require $_path_core . '/classes/system/config.class.php';
+	require $_path_class . 'system/config.class.php';
 
 	// Seta se o requisição está com HTTPs
 	define('_IS_HTTP',isset($_SERVER['HTTPS']) ? true : false);
@@ -143,7 +143,7 @@
 	require $_path_system . 'atributo.php';
 
 	// Inclui a classe AutoLoad
-	require PATH_MILES . $strutuct->auto_load_class;	
+	require PATH_MILES_LIBRARY . $strutuct->auto_load_class;	
 	$AutoLoad = new AutoLoad();	
 
 	// Carrega o arquivo da classe quando o objeto for invocado	
@@ -188,21 +188,6 @@
 	// Database Connection do Projeto
 	if (!defined("DATABASECONNECTION")) define("DATABASECONNECTION",$mjc->database_current);
 
-	// Abre a transação atual do banco de dados do projeto
-	if (!Transacao::abrir("current") && (tdc::r('controller') == '' || tdc::r('controller') == 'install') && AMBIENTE == 'SISTEMA'){
-
-		// Redireciona o sistema para instalação do sistema
-		include PATH_MVC_CONTROLLER . 'install.php';
-		exit;
-
-	}
-
-	// Variavel Global da conexão ative com banco de dados
-	$conn = Transacao::Get();
-
-	// Abre a conexão com o banco de dados MILES
-	$connMILES = null; # Descontinuado
-
 	// Aumenta o tamanho máximo para upload em 200MB
 	ini_set('upload_max_filesize', '200M');
 
@@ -222,3 +207,5 @@
 		default:
 			$_dados	= json_decode(tdc::r('dados') == '' ? (tdc::r('_dados')==''?'{}':tdc::r('_dados')) : tdc::r('dados'));		
 	}
+	$controller 		= tdc::r("_controller") == '' ? tdc::r("controller") : tdc::r("_controller");
+	$_controller		= tdc::r("_controller",$controller); # Novo padrão com _ na frente

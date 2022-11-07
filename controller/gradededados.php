@@ -132,8 +132,8 @@
 			$camponome 		= $campo_a[0];
 			
 			if ($f[1] == "%" && $f[3] == "varchar"){
-				$sql->addFiltro($camponome,"like",'%' . utf8charset($f[2],2) . '%');
-				$sqlTotal->addFiltro($camponome,"like",'%' . utf8charset($f[2],2) . '%');
+				$sql->addFiltro($camponome,"like",'%' . tdc::utf8($f[2],2) . '%');
+				$sqlTotal->addFiltro($camponome,"like",'%' . tdc::utf8($f[2],2) . '%');
 			}else if ($f[3] == "datetime"){
 				$dt = explode(" ",$f[2]);
 				$sql->addFiltro($camponome,$f[1],$f[2]);
@@ -173,8 +173,8 @@
 				$sql->addFiltro($camponome,"=",$filtro[1]);
 				$sqlTotal->addFiltro($camponome,"=",$filtro[1]);		
 			}else{
-				$sql->addFiltro($camponome,"like",'%' . utf8charset($filtro[1],2) . '%');
-				$sqlTotal->addFiltro($camponome,"like",'%' . utf8charset($filtro[1],2) . '%');
+				$sql->addFiltro($camponome,"like",'%' . tdc::utf8($filtro[1],2) . '%');
+				$sqlTotal->addFiltro($camponome,"like",'%' . tdc::utf8($filtro[1],2) . '%');
 			}
 		}
 	}
@@ -228,9 +228,9 @@
 			}else{
 				$valor_campo = $dado->{$c};
 			}
-			$utf8_value 			= isutf8($valor_campo) ? $valor_campo : utf8charset($valor_campo,'E');
+			$utf8_value 			= isutf8($valor_campo) ? $valor_campo : tdc::utf8($valor_campo,'E');
 			$campos_dados[$c] 		= getHTMLTipoFormato($camposhtml[$i],$utf8_value,$entidade->contexto->id,$c,$dado->id);
-			$campos_dados_reais[$c] = isutf8($dado->{$c}) ? $dado->{$c} : utf8charset($dado->{$c},'D');
+			$campos_dados_reais[$c] = isutf8($dado->{$c}) ? $dado->{$c} : tdc::utf8($dado->{$c},'D');
 			$i++;
 		}
 		$dados_array[$idRegIndice] 			= $campos_dados;

@@ -110,7 +110,7 @@ class Grade {
 				$camponome 	= $campo_a[0];
 
 				if ($f[1] == "%" && $f[3] == "varchar"){
-					$this->sql->addFiltro($camponome,"like",'%' . utf8charset($f[2],2) . '%');
+					$this->sql->addFiltro($camponome,"like",'%' . tdc::utf8($f[2],2) . '%');
 				}else if ($f[3] == "datetime"){
 					$dt = explode(" ",$f[2]);
 					$this->sql->addFiltro($camponome,$f[1],$f[2]);
@@ -152,10 +152,8 @@ class Grade {
 				
 				if ($filtro[2] == "int"){
 					$this->sql->addFiltro($camponome,"=",$filtro[1]);
-					//$sqlTotal->addFiltro($camponome,"=",$filtro[1]);		
 				}else{
-					$this->sql->addFiltro($camponome,"like",'%' . utf8charset($filtro[1],2) . '%');
-					//$sqlTotal->addFiltro($camponome,"like",'%' . utf8charset($filtro[1],2) . '%');
+					$this->sql->addFiltro($camponome,"like",'%' . tdc::utf8($filtro[1],2) . '%');
 				}
 			}
 		}
