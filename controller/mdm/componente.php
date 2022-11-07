@@ -54,8 +54,8 @@
 	fclose($fp);
 
 	// Cria o arquivo HTML Embutido Dinâmico	
-	if (!file_exists($_full_filename_html)){
-		$fp = fopen($_full_filename_html,'w');
+	if (!file_exists($_full_filename_htm)){
+		$fp = fopen($_full_filename_htm,'w');
 		fwrite($fp,"<!--\n * HTML Personalizado \n {$datacriacaodoc} \n {$authordoc} \n {$paginadoc} \n\n Escreve seu código HTML personalizado aqui! \n-->\n");
 		fclose($fp);
 	}	
@@ -156,5 +156,3 @@
 
 	// Cria o MDM File JavaScript Compile
 	include 'javascriptfile.php';
-
-	

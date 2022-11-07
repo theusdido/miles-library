@@ -2,7 +2,6 @@ miles.json
 vsc.bat
 winehq.key
 error_log
-config/temp_mysql.ini
 **/frameworks
 **/node_modules
 **/vendor
