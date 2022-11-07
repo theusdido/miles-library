@@ -1,11 +1,8 @@
-//loading-atualizar-personalizado
-
 $(document).ready(function(){
-    $('#btn-instalar').html('Instalar');
     $('#projectname').val();
     $('#projectfolder').val();
     $('#prefixo').val();
-    $('#loader-instalar').attr('src',session.urlloading);
+    $('#loader-instalar').attr('src',session.urlloading2);
 });
 
 var showpersonalizar    = false;

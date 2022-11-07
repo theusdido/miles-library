@@ -119,7 +119,7 @@
 			$ordem = $_POST["ordem"];
 		}
 
-		if ($tp_menu != 'cadastro'){
+		if ($tp_menu != 'cadastro' && $tp_menu != 'raiz'){
 			$sqlTpMenu 	= 'SELECT entidade FROM td_'.$tp_menu.' WHERE id = ' . $entidadeRequest;
 			$query 			= $conn->query($sqlTpMenu);
 			$linhaTpMenu	= $query->fetch();
