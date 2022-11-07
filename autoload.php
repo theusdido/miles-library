@@ -1,19 +1,21 @@
 <?php
 
-	// Global com o nome do diretório da instalação do MILES
-	$_folder_miles = 'miles-framework/';
-
-	define('FOLDER_MILES_LIBRARY','vendor/theusdido/miles-library/');
+	define('FOLDER_REPOSITORY', 'vendor/theusdido');
+	define('PATH_REPOSITORY', FOLDER_REPOSITORY . '/');
+	define('FOLDER_MILES_LIBRARY','miles-library');
 
 	// Raiz do servidor web, corresponde ao documentRoot
-	define('PATH_ROOT','/var/www/');
+	define('PATH_ROOT',$_SERVER['DOCUMENT_ROOT'] . '/');
+
+
+	// Global com o nome do diretório da instalação do MILES
+	$_folder_miles = str_replace(array(PATH_ROOT,FOLDER_REPOSITORY),'',dirname(__DIR__));
 
 	// Onde está o Miles Framework, index.php
 	define('PATH_MILES',PATH_ROOT . $_folder_miles);
-	//define('PATH_MILES',dirname(__DIR__) . '/miles-library/');
 
 	// Define o diretório da biblioteca dentro do vendor
-	define ('PATH_MILES_LIBRARY',PATH_MILES . FOLDER_MILES_LIBRARY);
+	define ('PATH_MILES_LIBRARY',PATH_MILES . PATH_REPOSITORY .  FOLDER_MILES_LIBRARY . '/');
 
 	// Tratamento de Erros
 	include PATH_MILES_LIBRARY . 'system/exception.php';

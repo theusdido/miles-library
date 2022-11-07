@@ -23,9 +23,6 @@
 		define('URL_ALIAS',URL_ROOT);
 	}
 
-	// URL API	
-	define('URL_API', REQUEST_PROTOCOL . $_domain . $_full_port . '/' . FOLDER_MILES . "index.php");
-
 	if (isset($mjc->folder)){
 		$request_uri_dir 	= (isset($_env->root) ? $_env->root  : '/') . $mjc->folder;
 
@@ -35,15 +32,17 @@
 		$request_uri_dir	= str_replace("index.php","",$request_uri[0]);
 	}
 
-
 	// URL MILES
-	$_url_miles	 = REQUEST_PROTOCOL . $_domain . $_full_port .  $request_uri_dir;	
-
+	$_url_miles	 = REQUEST_PROTOCOL . $_domain . $_full_port .  $request_uri_dir;
+	
 	define('URL_MILES',$_url_miles);
 
 	define('URL_AUTOLOAD',$_url_miles . 'autoload.php');
 
-	define('URL_MILES_LIBRARY',URL_MILES . FOLDER_MILES_LIBRARY);
+	define('URL_MILES_LIBRARY',URL_MILES . PATH_REPOSITORY .  FOLDER_MILES_LIBRARY . '/');
+
+	// URL API	
+	define('URL_API', $_url_miles . "index.php");
 
 	// URL NODEJS
 	define('URL_NODEJS', REQUEST_PROTOCOL . $_domain . ':2711/');

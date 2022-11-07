@@ -57,10 +57,9 @@
       $js     = tdc::html('script');
       $js->add('
             $("#menu-instalacao").load("'.URL_API.'?controller=page&page=install/guia");
-            $("#conteudo-instalacao").load("'.URL_MILES.'?controller=page&page=install/criarbase");
+            $("#conteudo-instalacao").load("'.URL_API.'?controller=page&page=install/criarbase");
       ');
       $install_page->addBody($js);
-      //var_dump(URL_API.'?controller=page&page=install/guia');
-      //var_dump(URL_MILES.'?controller=page&page=install/criarbase');
+
       // Renderiza a página
       $install_page->mostrar();
